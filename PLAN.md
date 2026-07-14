@@ -98,7 +98,9 @@ General rules:
 ## Open Items / Future Phases
 
 - Finalize real trailer lineup with client (current list is placeholder)
-- Real logo and trailer photography (currently placeholder/stock)
+- Real trailer photography (logo is final; trailer/blog photos still placeholder until uploaded via admin)
+- Connect a database (Vercel Postgres/Neon/Supabase) and Vercel Blob in the Vercel dashboard — admin panel is built and falls back to seed data until `DATABASE_URL` is set
 - Google Sheets API integration for form submissions
-- Live Google Reviews integration — tool/API TBD
-- Admin portal real authentication/security hardening before go-live
+- Live Google Reviews integration — tool/API TBD (Facebook reviews are in as a static carousel for now)
+- Admin portal real authentication/security hardening before go-live (current login is a single shared demo password)
+- Host the site (Vercel via GitHub import recommended — connects the repo, auto-deploys on push)
