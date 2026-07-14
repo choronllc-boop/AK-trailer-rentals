@@ -113,8 +113,6 @@ function Dashboard() {
                   description: "",
                   amenities: [],
                   images: [],
-                  rating: 0,
-                  reviews: [],
                 },
               ])
             }

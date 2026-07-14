@@ -1,8 +1,8 @@
 export const business = {
   name: "AK Trailer Rentals",
-  phone: "907-555-0142",
-  phoneHref: "tel:+19075550142",
-  email: "info@aktrailerrentals.com",
+  phone: "785-416-0279",
+  phoneHref: "tel:+17854160279",
+  email: "akrental7@outlook.com",
   address: "1420 E Parks Hwy, Wasilla, AK 99654",
   mapsHref: "https://www.google.com/maps/search/?api=1&query=1420+E+Parks+Hwy+Wasilla+AK+99654",
   hours: [
@@ -32,9 +32,27 @@ export type Trailer = {
   description: string;
   amenities: string[];
   images: string[];
-  rating: number;
-  reviews: { name: string; date: string; text: string }[];
 };
+
+export type FacebookReview = {
+  name: string;
+  quote: string;
+  reply?: string;
+};
+
+export const facebookReviews: FacebookReview[] = [
+  {
+    name: "Cristian Reveles",
+    quote:
+      "Would rent from him again in a heartbeat. Super easy and straight forward. Had a blow out 5 hours out and he had someone replace the tire within 45 minutes without a question. Would recommend him to anyone I know needing a trailer. Super nice trailer that pulls well and straight and awesome customer service.",
+    reply: "Thank you for using AK Trailer Rental, we'll see you on your next rental 🙏🏽",
+  },
+  {
+    name: "Tyler Pankratz",
+    quote: "Very nice and friendly and very nice trailer too, I will be renting again.",
+    reply: "Thank you 🙏🏽",
+  },
+];
 
 export const trailers: Trailer[] = [
   {
@@ -52,19 +70,6 @@ export const trailers: Trailer[] = [
       "Our open-deck car hauler is built for moving a single vehicle, ATV, or small equipment across the Mat-Su Valley. Steel ramps and tie-down points on all four corners make loading straightforward.",
     amenities: ["Steel loading ramps", "4-corner tie-downs", "LED lighting", "Spare tire included"],
     images: ["/trailers/car-hauler-1.jpg", "/trailers/car-hauler-2.jpg", "/trailers/car-hauler-3.jpg"],
-    rating: 4.9,
-    reviews: [
-      {
-        name: "Kaveh M.",
-        date: "March 2026",
-        text: "Easy pickup, trailer was clean and ready to go. Booked online in five minutes and hookup was straightforward.",
-      },
-      {
-        name: "Dean R.",
-        date: "January 2026",
-        text: "Staff walked me through hookup step by step. Great for a first-time renter — will book again.",
-      },
-    ],
   },
   {
     slug: "log-hauler",
@@ -81,19 +86,6 @@ export const trailers: Trailer[] = [
       "Built for hauling firewood, logs, and lumber around Southcentral Alaska. Reinforced stake pockets hold removable side rails for bulkier loads.",
     amenities: ["Removable side rails", "Stake pockets", "Heavy-duty deck", "Chain tie-downs"],
     images: ["/trailers/log-hauler-1.jpg", "/trailers/log-hauler-2.jpg", "/trailers/log-hauler-3.jpg"],
-    rating: 4.8,
-    reviews: [
-      {
-        name: "Sarah T.",
-        date: "October 2025",
-        text: "Used the log hauler for firewood season two years running. Always reliable and the side rails make a huge difference.",
-      },
-      {
-        name: "Mike H.",
-        date: "September 2025",
-        text: "Hauled a full cord of birch without any issues. Deck is solid and tie-down points are exactly where you need them.",
-      },
-    ],
   },
   {
     slug: "utility-trailer",
@@ -110,19 +102,6 @@ export const trailers: Trailer[] = [
       "A do-it-all trailer for yard cleanup, moving furniture, or small landscaping jobs. Light enough to tow with most SUVs and trucks.",
     amenities: ["Mesh side rails", "Rear ramp gate", "Tie-down loops", "Spare tire included"],
     images: ["/trailers/utility-1.jpg", "/trailers/utility-2.jpg", "/trailers/utility-3.jpg"],
-    rating: 4.9,
-    reviews: [
-      {
-        name: "Jess P.",
-        date: "May 2026",
-        text: "Perfect for a yard cleanup weekend. Light enough to tow with my SUV and easy to back up.",
-      },
-      {
-        name: "Tom W.",
-        date: "April 2026",
-        text: "Rented it to move a couch and some furniture. Ramp gate made loading simple, no complaints.",
-      },
-    ],
   },
   {
     slug: "enclosed-cargo",
@@ -139,19 +118,6 @@ export const trailers: Trailer[] = [
       "Keep your cargo dry and secure on the Parks Highway. Great for moving, storage, and hauling tools or equipment that needs to stay covered.",
     amenities: ["Lockable rear door", "Side entry door", "Interior tie-downs", "Weatherproof seal"],
     images: ["/trailers/enclosed-1.jpg", "/trailers/enclosed-2.jpg", "/trailers/enclosed-3.jpg"],
-    rating: 4.7,
-    reviews: [
-      {
-        name: "Amanda K.",
-        date: "February 2026",
-        text: "Kept everything bone dry during a move in the rain. The lock gave me peace of mind leaving it overnight.",
-      },
-      {
-        name: "Chris B.",
-        date: "December 2025",
-        text: "Used it to haul tools for a job site. Weatherproofing held up great through some heavy Alaska weather.",
-      },
-    ],
   },
 ];
 

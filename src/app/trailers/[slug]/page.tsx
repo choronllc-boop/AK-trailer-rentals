@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { trailers } from "@/lib/site-data";
+import { facebookReviews, trailers } from "@/lib/site-data";
 
 export function generateStaticParams() {
   return trailers.map((t) => ({ slug: t.slug }));
@@ -94,24 +94,21 @@ export default async function TrailerDetailPage({
 
       <div className="mt-16 max-w-2xl">
         <p className="flex items-center gap-2 text-lg text-coffee">
-          <span className="text-pumpkin">★</span>
-          <span className="font-bold">{trailer.rating}</span>
-          <span className="text-coffee/60">· {trailer.reviews.length} reviews</span>
+          <span>👍</span>
+          <span className="font-bold">Recommended</span>
+          <span className="text-coffee/60">· {facebookReviews.length} reviews on Facebook</span>
         </p>
 
         <div className="mt-6 grid gap-8 sm:grid-cols-2">
-          {trailer.reviews.map((review) => (
+          {facebookReviews.map((review) => (
             <div key={review.name}>
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-full bg-almond font-semibold text-coffee">
                   {review.name.charAt(0)}
                 </span>
-                <div>
-                  <p className="font-semibold text-coffee">{review.name}</p>
-                  <p className="text-sm text-coffee/60">{review.date}</p>
-                </div>
+                <p className="font-semibold text-coffee">{review.name}</p>
               </div>
-              <p className="mt-3 text-coffee/80">{review.text}</p>
+              <p className="mt-3 text-coffee/80">{review.quote}</p>
             </div>
           ))}
         </div>
