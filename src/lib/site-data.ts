@@ -52,6 +52,65 @@ export const facebookReviews: FacebookReview[] = [
     quote: "Very nice and friendly and very nice trailer too, I will be renting again.",
     reply: "Thank you 🙏🏽",
   },
+  {
+    name: "Timothy Tanner Cox",
+    quote: "Highly recommend. He was fast and professional.",
+  },
+  {
+    name: "Shelby Tabor",
+    quote:
+      "This is by far the most honest and caring place. I was in a bind and they helped me out and didn't even charge me. I will definitely be using them again.",
+  },
+  {
+    name: "Brenton Carlson",
+    quote:
+      "I'd highly recommend them! He was very punctual and respectful, very careful with what he was hauling and just all around a good guy!",
+  },
+  {
+    name: "Justin Hernandez",
+    quote: "Very helpful and reliable.",
+  },
+  {
+    name: "Daniel Lamas Ortiz",
+    quote: "Great service and very professional.",
+  },
+  {
+    name: "Lanie Hanes",
+    quote: "Excellent experience, very communicative and helpful.",
+  },
+  {
+    name: "Sadie Ward",
+    quote: "Highly recommend for any transport needs.",
+  },
+  {
+    name: "Alina Quevedo",
+    quote:
+      "We used AK Transportation over the weekend to get a Tommy lift for our truck. They were super organized, delivered on time and within our budget. Will definitely be using them again for any other transportation needs!",
+  },
+  {
+    name: "Alex Sweet",
+    quote:
+      "I would highly recommend AK Transportation LLC! I had a vehicle needing trailered on short notice and he helped make it possible. He went above and beyond to take care of me and get my vehicle where it needed to be! Highly recommend his services, I would not hesitate to use his business again!",
+  },
+  {
+    name: "Grant Dodge",
+    quote: "Great service and knows what he's doing when it comes to his business!! Highly recommend!!!",
+  },
+  {
+    name: "Christopher Parker",
+    quote:
+      "Thanks to AK Transportation LLC Allan Blevins for the hookup on the great trailer and safe equipment to get the broken car home from the ice cream cruise. Would definitely recommend for all trailer rental needs.",
+  },
+  {
+    name: "Travis Graham",
+    quote:
+      "Sent a message to AK Trailer Rentals LLC and within 30 minutes he had a trailer at my house. He was very professional and the trailer was in great shape. I would highly recommend him to anyone.",
+  },
+  {
+    name: "Scott Bailey",
+    quote:
+      "If you need a trailer or someone to haul something for you, AK Transportation LLC is the place to go. Very professional and reliable. He went out of his way to help me and I really appreciate it.",
+  },
 ];
 
 export const trailers: Trailer[] = [

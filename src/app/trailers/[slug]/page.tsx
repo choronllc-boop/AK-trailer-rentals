@@ -81,7 +81,7 @@ export default async function TrailerDetailPage({
         </p>
 
         <div className="mt-6 grid gap-8 sm:grid-cols-2">
-          {facebookReviews.map((review) => (
+          {facebookReviews.slice(0, 4).map((review) => (
             <div key={review.name}>
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-full bg-almond font-semibold text-coffee">
