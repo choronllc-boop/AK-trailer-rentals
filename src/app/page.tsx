@@ -88,22 +88,6 @@ export default function Home() {
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <h2 className="font-display text-2xl text-coffee sm:text-3xl">Why rent from us</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {[
-            { title: "Local & reliable", body: "Family-owned and operated right here in Wasilla." },
-            { title: "Well-maintained fleet", body: "Every trailer is inspected before it leaves the lot." },
-            { title: "No dead ends", body: "Real people to call, text, or visit — no runaround." },
-          ].map((item) => (
-            <div key={item.title} className="rounded-2xl bg-almond/40 p-6">
-              <p className="font-semibold text-coffee">{item.title}</p>
-              <p className="mt-2 text-sm text-coffee/70">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="flex items-baseline justify-between">
           <h2 className="font-display text-2xl text-coffee sm:text-3xl">From the blog</h2>
           <Link href="/blog" className="text-sm font-semibold text-pumpkin hover:text-chestnut">
