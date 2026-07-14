@@ -2,6 +2,7 @@ import Link from "next/link";
 import { blogPosts, trailers } from "@/lib/site-data";
 import ServiceAreas from "@/components/ServiceAreas";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import TrailerGrid from "@/components/TrailerGrid";
 
 export default function Home() {
   return (
@@ -27,21 +28,8 @@ export default function Home() {
 
       <section className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <h2 className="font-display text-2xl text-coffee sm:text-3xl">Find the right trailer</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {trailers.map((trailer) => (
-            <Link
-              key={trailer.slug}
-              href={`/trailers/${trailer.slug}`}
-              className="group rounded-2xl border border-almond bg-white p-5 transition-colors hover:border-pumpkin"
-            >
-              <div className="aspect-4/3 w-full rounded-xl bg-almond/50" />
-              <p className="mt-4 font-semibold text-coffee">{trailer.name}</p>
-              <p className="mt-1 text-sm text-coffee/60">{trailer.tagline}</p>
-              <p className="mt-3 text-sm font-semibold text-pumpkin">
-                ${trailer.pricePerDay}/day
-              </p>
-            </Link>
-          ))}
+        <div className="mt-8">
+          <TrailerGrid trailers={trailers} columns="sm:grid-cols-2 lg:grid-cols-4" />
         </div>
       </section>
 
