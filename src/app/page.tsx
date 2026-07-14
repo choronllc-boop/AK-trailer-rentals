@@ -36,7 +36,7 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="flex flex-col items-start gap-4 rounded-3xl bg-chestnut/10 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-start gap-4 rounded-3xl border border-black bg-chestnut/10 p-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="font-display text-2xl text-coffee">Check live availability</h2>
             <p className="mt-2 max-w-md text-coffee/70">
