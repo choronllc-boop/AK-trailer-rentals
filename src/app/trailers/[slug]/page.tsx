@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { facebookReviews, trailers } from "@/lib/site-data";
+import CheckAvailabilityButton from "@/components/CheckAvailabilityButton";
 
 export function generateStaticParams() {
   return trailers.map((t) => ({ slug: t.slug }));
@@ -43,27 +44,7 @@ export default async function TrailerDetailPage({
             ${trailer.pricePerDay} <span className="text-base font-normal text-coffee/60">/ day</span>
           </p>
 
-          <Link
-            href={`/book?trailer=${trailer.slug}`}
-            className="mt-6 flex max-w-sm items-center justify-between rounded-full border border-almond bg-white py-2 pl-6 pr-2 shadow-sm transition-colors hover:border-pumpkin"
-          >
-            <span className="font-semibold text-coffee">Check Availability</span>
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-coffee text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="size-5"
-              >
-                <rect x="3" y="4" width="18" height="18" rx="2" />
-                <path d="M16 2v4M8 2v4M3 10h18" />
-              </svg>
-            </span>
-          </Link>
+          <CheckAvailabilityButton trailer={trailer} />
 
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {trailer.specs.map((spec) => (
