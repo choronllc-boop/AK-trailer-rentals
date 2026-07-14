@@ -45,9 +45,24 @@ export default async function TrailerDetailPage({
 
           <Link
             href={`/book?trailer=${trailer.slug}`}
-            className="mt-6 inline-block rounded-full bg-pumpkin px-8 py-3 text-base font-semibold text-white hover:bg-chestnut"
+            className="mt-6 flex max-w-sm items-center justify-between rounded-full border border-almond bg-white py-2 pl-6 pr-2 shadow-sm transition-colors hover:border-pumpkin"
           >
-            Check Availability
+            <span className="font-semibold text-coffee">Check Availability</span>
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-coffee text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="size-5"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+            </span>
           </Link>
 
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -77,11 +92,29 @@ export default async function TrailerDetailPage({
         </div>
       </div>
 
-      <div className="mt-16 border-t border-almond pt-10">
-        <p className="text-sm font-semibold text-pumpkin">★★★★★ 4.9 · 32 reviews</p>
-        <p className="mt-2 max-w-2xl text-coffee/70">
-          Reviews for this trailer sync live from Google — check the homepage for the latest.
+      <div className="mt-16 max-w-2xl border-t border-almond pt-10">
+        <p className="flex items-center gap-2 text-lg text-coffee">
+          <span className="text-pumpkin">★</span>
+          <span className="font-bold">{trailer.rating}</span>
+          <span className="text-coffee/60">· {trailer.reviews.length} reviews</span>
         </p>
+
+        <div className="mt-6 grid gap-8 sm:grid-cols-2">
+          {trailer.reviews.map((review) => (
+            <div key={review.name}>
+              <div className="flex items-center gap-3">
+                <span className="flex size-10 items-center justify-center rounded-full bg-almond font-semibold text-coffee">
+                  {review.name.charAt(0)}
+                </span>
+                <div>
+                  <p className="font-semibold text-coffee">{review.name}</p>
+                  <p className="text-sm text-coffee/60">{review.date}</p>
+                </div>
+              </div>
+              <p className="mt-3 text-coffee/80">{review.text}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

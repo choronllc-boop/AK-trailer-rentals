@@ -32,6 +32,8 @@ export type Trailer = {
   description: string;
   amenities: string[];
   images: string[];
+  rating: number;
+  reviews: { name: string; date: string; text: string }[];
 };
 
 export const trailers: Trailer[] = [
@@ -50,6 +52,19 @@ export const trailers: Trailer[] = [
       "Our open-deck car hauler is built for moving a single vehicle, ATV, or small equipment across the Mat-Su Valley. Steel ramps and tie-down points on all four corners make loading straightforward.",
     amenities: ["Steel loading ramps", "4-corner tie-downs", "LED lighting", "Spare tire included"],
     images: ["/trailers/car-hauler-1.jpg", "/trailers/car-hauler-2.jpg", "/trailers/car-hauler-3.jpg"],
+    rating: 4.9,
+    reviews: [
+      {
+        name: "Kaveh M.",
+        date: "March 2026",
+        text: "Easy pickup, trailer was clean and ready to go. Booked online in five minutes and hookup was straightforward.",
+      },
+      {
+        name: "Dean R.",
+        date: "January 2026",
+        text: "Staff walked me through hookup step by step. Great for a first-time renter — will book again.",
+      },
+    ],
   },
   {
     slug: "log-hauler",
@@ -66,6 +81,19 @@ export const trailers: Trailer[] = [
       "Built for hauling firewood, logs, and lumber around Southcentral Alaska. Reinforced stake pockets hold removable side rails for bulkier loads.",
     amenities: ["Removable side rails", "Stake pockets", "Heavy-duty deck", "Chain tie-downs"],
     images: ["/trailers/log-hauler-1.jpg", "/trailers/log-hauler-2.jpg", "/trailers/log-hauler-3.jpg"],
+    rating: 4.8,
+    reviews: [
+      {
+        name: "Sarah T.",
+        date: "October 2025",
+        text: "Used the log hauler for firewood season two years running. Always reliable and the side rails make a huge difference.",
+      },
+      {
+        name: "Mike H.",
+        date: "September 2025",
+        text: "Hauled a full cord of birch without any issues. Deck is solid and tie-down points are exactly where you need them.",
+      },
+    ],
   },
   {
     slug: "utility-trailer",
@@ -82,6 +110,19 @@ export const trailers: Trailer[] = [
       "A do-it-all trailer for yard cleanup, moving furniture, or small landscaping jobs. Light enough to tow with most SUVs and trucks.",
     amenities: ["Mesh side rails", "Rear ramp gate", "Tie-down loops", "Spare tire included"],
     images: ["/trailers/utility-1.jpg", "/trailers/utility-2.jpg", "/trailers/utility-3.jpg"],
+    rating: 4.9,
+    reviews: [
+      {
+        name: "Jess P.",
+        date: "May 2026",
+        text: "Perfect for a yard cleanup weekend. Light enough to tow with my SUV and easy to back up.",
+      },
+      {
+        name: "Tom W.",
+        date: "April 2026",
+        text: "Rented it to move a couch and some furniture. Ramp gate made loading simple, no complaints.",
+      },
+    ],
   },
   {
     slug: "enclosed-cargo",
@@ -98,6 +139,19 @@ export const trailers: Trailer[] = [
       "Keep your cargo dry and secure on the Parks Highway. Great for moving, storage, and hauling tools or equipment that needs to stay covered.",
     amenities: ["Lockable rear door", "Side entry door", "Interior tie-downs", "Weatherproof seal"],
     images: ["/trailers/enclosed-1.jpg", "/trailers/enclosed-2.jpg", "/trailers/enclosed-3.jpg"],
+    rating: 4.7,
+    reviews: [
+      {
+        name: "Amanda K.",
+        date: "February 2026",
+        text: "Kept everything bone dry during a move in the rain. The lock gave me peace of mind leaving it overnight.",
+      },
+      {
+        name: "Chris B.",
+        date: "December 2025",
+        text: "Used it to haul tools for a job site. Weatherproofing held up great through some heavy Alaska weather.",
+      },
+    ],
   },
 ];
 
