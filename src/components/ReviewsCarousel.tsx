@@ -4,17 +4,14 @@ import { facebookReviews } from "@/lib/site-data";
 // container the carousel is rendered in.
 const CARD_WIDTH = "w-[170px]";
 
+// Fixed height + line-clamp so every card is the same size regardless of
+// review length, instead of stretching/shrinking to fit its own text.
 function ReviewCard({ review }: { review: (typeof facebookReviews)[number] }) {
   return (
-    <div className={`${CARD_WIDTH} shrink-0 rounded-xl border border-almond bg-white p-4`}>
+    <div className={`${CARD_WIDTH} flex h-44 shrink-0 flex-col rounded-xl border border-almond bg-white p-4`}>
       <p className="text-xs font-semibold text-pumpkin">👍 Recommends AK Trailer Rentals</p>
-      <p className="mt-2 text-xs text-coffee/80">&ldquo;{review.quote}&rdquo;</p>
-      <p className="mt-2 text-xs font-semibold text-coffee">{review.name}</p>
-      {review.reply && (
-        <p className="mt-2 border-l-2 border-almond pl-2 text-[11px] text-coffee/60">
-          <span className="font-semibold text-coffee">AK Trailer Rentals:</span> {review.reply}
-        </p>
-      )}
+      <p className="mt-2 line-clamp-5 text-xs text-coffee/80">&ldquo;{review.quote}&rdquo;</p>
+      <p className="mt-auto pt-2 text-xs font-semibold text-coffee">{review.name}</p>
     </div>
   );
 }
@@ -32,7 +29,7 @@ export default function ReviewsCarousel() {
   return (
     <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
       <div
-        className="animate-marquee flex w-max gap-4"
+        className="animate-marquee flex w-max items-start gap-4"
         style={{ animationDuration: `${durationSeconds}s` }}
       >
         {cards.map((review, i) => (
