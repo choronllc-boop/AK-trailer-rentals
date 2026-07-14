@@ -5,6 +5,7 @@ export const business = {
   email: "akrental7@outlook.com",
   address: "1420 E Parks Hwy, Wasilla, AK 99654",
   mapsHref: "https://www.google.com/maps/search/?api=1&query=1420+E+Parks+Hwy+Wasilla+AK+99654",
+  facebookHref: "https://www.facebook.com/AKtransportationllc",
   hours: [
     { day: "Monday – Friday", time: "8:00 AM – 6:00 PM" },
     { day: "Saturday", time: "9:00 AM – 4:00 PM" },

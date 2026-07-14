@@ -1,8 +1,12 @@
 import { facebookReviews } from "@/lib/site-data";
 
+// Sized so exactly 6 cards (170px + 16px gap each) fit within the max-w-6xl
+// container the carousel is rendered in.
+const CARD_WIDTH = "w-[170px]";
+
 function ReviewCard({ review }: { review: (typeof facebookReviews)[number] }) {
   return (
-    <div className="w-48 shrink-0 rounded-xl border border-almond bg-white p-4 sm:w-56">
+    <div className={`${CARD_WIDTH} shrink-0 rounded-xl border border-almond bg-white p-4`}>
       <p className="text-xs font-semibold text-pumpkin">👍 Recommends AK Trailer Rentals</p>
       <p className="mt-2 text-xs text-coffee/80">&ldquo;{review.quote}&rdquo;</p>
       <p className="mt-2 text-xs font-semibold text-coffee">{review.name}</p>

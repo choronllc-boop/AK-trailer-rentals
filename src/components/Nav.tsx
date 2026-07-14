@@ -22,7 +22,7 @@ export default function Nav() {
           ))}
         </nav>
         <Link
-          href="/book"
+          href="/trailers"
           className="rounded-full bg-pumpkin px-5 py-2 text-sm font-semibold text-white hover:bg-chestnut"
         >
           Book a Trailer

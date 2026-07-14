@@ -59,12 +59,20 @@ export default function Footer() {
       <div className="border-t border-almond/20">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-6 text-xs text-almond/60 sm:px-6">
           <p>© {new Date().getFullYear()} {business.name}. All rights reserved.</p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             {nav.slice(1).map((item) => (
               <Link key={item.href} href={item.href} className="hover:text-pumpkin">
                 {item.label}
               </Link>
             ))}
+            <a
+              href={business.facebookHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-pumpkin"
+            >
+              Facebook
+            </a>
           </div>
         </div>
       </div>
