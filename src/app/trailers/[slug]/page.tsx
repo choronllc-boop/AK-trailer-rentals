@@ -1,10 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { facebookReviews, trailers } from "@/lib/site-data";
+import { facebookReviews } from "@/lib/site-data";
+import { getTrailer, getTrailers } from "@/lib/data";
 import CheckAvailabilityButton from "@/components/CheckAvailabilityButton";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const trailers = await getTrailers();
   return trailers.map((t) => ({ slug: t.slug }));
 }
 
@@ -14,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const trailer = trailers.find((t) => t.slug === slug);
+  const trailer = await getTrailer(slug);
   if (!trailer) return {};
   return {
     title: `${trailer.name} | AK Trailer Rentals`,
@@ -28,7 +31,7 @@ export default async function TrailerDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const trailer = trailers.find((t) => t.slug === slug);
+  const trailer = await getTrailer(slug);
   if (!trailer) notFound();
 
   return (
@@ -67,9 +70,22 @@ export default async function TrailerDetailPage({
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="col-span-2 aspect-4/3 rounded-2xl bg-almond/50" />
-          <div className="aspect-square rounded-2xl bg-almond/50" />
-          <div className="aspect-square rounded-2xl bg-almond/50" />
+          {trailer.images[0] ? (
+            <div className="relative col-span-2 aspect-4/3 overflow-hidden rounded-2xl bg-almond/50">
+              <Image src={trailer.images[0]} alt={trailer.name} fill sizes="(min-width: 1024px) 576px, 100vw" className="object-cover" />
+            </div>
+          ) : (
+            <div className="col-span-2 aspect-4/3 rounded-2xl bg-almond/50" />
+          )}
+          {[1, 2].map((i) =>
+            trailer.images[i] ? (
+              <div key={i} className="relative aspect-square overflow-hidden rounded-2xl bg-almond/50">
+                <Image src={trailer.images[i]} alt={trailer.name} fill sizes="(min-width: 1024px) 280px, 50vw" className="object-cover" />
+              </div>
+            ) : (
+              <div key={i} className="aspect-square rounded-2xl bg-almond/50" />
+            ),
+          )}
         </div>
       </div>
 

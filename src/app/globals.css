@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --color-coffee: #130303;
-  --color-mahogany: #2d080a;
-  --color-chestnut: #7c3626;
-  --color-pumpkin: #f5853f;
-  --color-almond: #ffcdbc;
+  /* Taupe Grey — primary text + dark sections (was near-black coffee) */
+  --color-coffee: #604d53;
+  /* Darker taupe — hover shade for coffee-bg buttons (was mahogany) */
+  --color-mahogany: #453740;
+  /* Old Rose — secondary accent, hover states (was chestnut) */
+  --color-chestnut: #db7f8e;
+  /* Cool Steel — primary accent/CTA color (was pumpkin orange) */
+  --color-pumpkin: #9da3a4;
+  /* Soft Blush — light section backgrounds/borders (was almond) */
+  --color-almond: #ffdbda;
+  /* Pale Slate — page background */
+  --color-slate: #d5c5c8;
 }
 
 @theme inline {
@@ -14,13 +21,14 @@
   --color-chestnut: var(--color-chestnut);
   --color-pumpkin: var(--color-pumpkin);
   --color-almond: var(--color-almond);
+  --color-slate: var(--color-slate);
 
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-cal-sans), var(--font-montserrat);
 }
 
 body {
-  background: #fff;
+  background: var(--color-slate);
   color: var(--color-coffee);
 }
 

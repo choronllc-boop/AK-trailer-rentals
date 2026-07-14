@@ -45,6 +45,16 @@ export default function Nav() {
             Contact Us
           </Link>
           <Link
+            href="/admin"
+            className={`hidden rounded-full border px-5 py-2 text-sm font-semibold transition-colors sm:inline-block ${
+              isActive("/admin")
+                ? "border-coffee bg-coffee text-white"
+                : "border-almond text-coffee/70 hover:border-coffee hover:text-coffee"
+            }`}
+          >
+            Admin
+          </Link>
+          <Link
             href="/trailers"
             className={`rounded-full px-5 py-2 text-sm font-semibold text-white transition-colors ${
               isActive("/trailers") ? "bg-chestnut" : "bg-pumpkin hover:bg-chestnut"

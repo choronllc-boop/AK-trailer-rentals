@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { getTrailers, getBlogPosts } from "@/lib/data";
+import { sql } from "@/lib/db";
 import AdminDashboard from "@/components/AdminDashboard";
 
 export const metadata: Metadata = {
@@ -6,6 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function AdminPage() {
-  return <AdminDashboard />;
+export default async function AdminPage() {
+  const [trailers, posts] = await Promise.all([getTrailers(), getBlogPosts()]);
+  return <AdminDashboard initialTrailers={trailers} initialPosts={posts} dbConnected={sql !== null} />;
 }

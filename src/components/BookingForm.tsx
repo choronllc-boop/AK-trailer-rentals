@@ -2,11 +2,11 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { trailers } from "@/lib/site-data";
+import type { Trailer } from "@/lib/site-data";
 
-export default function BookingForm() {
+export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
   const searchParams = useSearchParams();
-  const preselected = searchParams.get("trailer") ?? trailers[0].slug;
+  const preselected = searchParams.get("trailer") ?? trailers[0]?.slug;
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {

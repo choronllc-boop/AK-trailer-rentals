@@ -114,7 +114,9 @@ export const facebookReviews: FacebookReview[] = [
   },
 ];
 
-export const trailers: Trailer[] = [
+// Seed data — used to populate the database on first run, and as a
+// fallback when no DATABASE_URL is configured (e.g. local dev).
+export const seedTrailers: Trailer[] = [
   {
     slug: "car-hauler",
     name: "Car Hauler Trailer",
@@ -228,15 +230,20 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
+  body: string;
   date: string;
   category: string;
 };
 
-export const blogPosts: BlogPost[] = [
+const placeholderBody = (excerpt: string) =>
+  `${excerpt}\n\nThis is placeholder content for the AK Trailer Rentals blog — practical guidance for renters in Wasilla and across the Mat-Su Valley.\n\nHave a question about this topic? Contact us and we'll be glad to help you pick the right trailer for the job.`;
+
+export const seedBlogPosts: BlogPost[] = [
   {
     slug: "how-to-choose-the-right-trailer",
     title: "How to Choose the Right Trailer for Your Job",
     excerpt: "From car haulers to enclosed cargo trailers, here's how to match the trailer to the task.",
+    body: placeholderBody("From car haulers to enclosed cargo trailers, here's how to match the trailer to the task."),
     date: "2026-03-04",
     category: "Guides",
   },
@@ -244,6 +251,7 @@ export const blogPosts: BlogPost[] = [
     slug: "towing-capacity-101",
     title: "Towing Capacity 101: What Your Vehicle Can Actually Pull",
     excerpt: "A quick primer on curb weight, GCWR, and how to avoid overloading your tow vehicle.",
+    body: placeholderBody("A quick primer on curb weight, GCWR, and how to avoid overloading your tow vehicle."),
     date: "2026-02-18",
     category: "Guides",
   },
@@ -251,6 +259,7 @@ export const blogPosts: BlogPost[] = [
     slug: "firewood-season-mat-su",
     title: "Getting Ready for Firewood Season in the Mat-Su Valley",
     excerpt: "Why fall is the busiest season for our log and wood haulers, and how to book ahead.",
+    body: placeholderBody("Why fall is the busiest season for our log and wood haulers, and how to book ahead."),
     date: "2026-08-22",
     category: "Seasonal",
   },
@@ -258,6 +267,7 @@ export const blogPosts: BlogPost[] = [
     slug: "spring-moving-checklist",
     title: "Spring Moving Checklist for Southcentral Alaska",
     excerpt: "Planning a move this spring? Here's what to line up before your rental day.",
+    body: placeholderBody("Planning a move this spring? Here's what to line up before your rental day."),
     date: "2026-04-01",
     category: "Seasonal",
   },
@@ -265,6 +275,7 @@ export const blogPosts: BlogPost[] = [
     slug: "new-utility-trailers-2026",
     title: "We've Added New Utility Trailers to the Fleet",
     excerpt: "Three new 12 ft utility trailers are now available for booking year-round.",
+    body: placeholderBody("Three new 12 ft utility trailers are now available for booking year-round."),
     date: "2026-01-15",
     category: "Company News",
   },

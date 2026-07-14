@@ -1,13 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { blogPosts } from "@/lib/site-data";
+import { getBlogPosts } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Blog | AK Trailer Rentals",
   description: "Towing guides, seasonal tips, and news from AK Trailer Rentals.",
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
       <p className="text-sm font-semibold tracking-wide text-chestnut">BLOG</p>

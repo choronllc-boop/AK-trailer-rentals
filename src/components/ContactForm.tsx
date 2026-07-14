@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { trailers } from "@/lib/site-data";
+import type { Trailer } from "@/lib/site-data";
 
-export default function ContactForm() {
+export default function ContactForm({ trailers }: { trailers: Trailer[] }) {
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {

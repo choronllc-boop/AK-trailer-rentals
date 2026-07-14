@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { getTrailers } from "@/lib/data";
 import BookingForm from "@/components/BookingForm";
 
 export const metadata: Metadata = {
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: "Check availability and book a trailer online.",
 };
 
-export default function BookPage() {
+export default async function BookPage() {
+  const trailers = await getTrailers();
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <p className="text-sm font-semibold tracking-wide text-chestnut">BOOK ONLINE</p>
@@ -18,7 +21,7 @@ export default function BookPage() {
       </p>
 
       <Suspense>
-        <BookingForm />
+        <BookingForm trailers={trailers} />
       </Suspense>
     </div>
   );

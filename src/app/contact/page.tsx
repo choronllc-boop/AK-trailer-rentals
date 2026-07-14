@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { business } from "@/lib/site-data";
+import { getTrailers } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: "Hours, phone, email, and location for AK Trailer Rentals in Wasilla, AK.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const trailers = await getTrailers();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <p className="text-sm font-semibold tracking-wide text-chestnut">GET IN TOUCH</p>
@@ -55,7 +58,7 @@ export default function ContactPage() {
           <div className="mt-8 aspect-video w-full rounded-2xl bg-almond/50" />
         </div>
 
-        <ContactForm />
+        <ContactForm trailers={trailers} />
       </div>
     </div>
   );

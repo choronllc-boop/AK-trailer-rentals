@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Trailer } from "@/lib/site-data";
 
@@ -43,12 +44,23 @@ export default function TrailerAvailabilityModal({
           <span className="absolute right-2 top-2 z-10 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-coffee shadow">
             <span className="size-2 rounded-full bg-green-500" /> Available
           </span>
-          <div className="aspect-4/3 w-full rounded-xl bg-almond/50" />
+          {trailer.images[0] ? (
+            <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl bg-almond/50">
+              <Image src={trailer.images[0]} alt={trailer.name} fill sizes="(min-width: 640px) 576px, 100vw" className="object-cover" />
+            </div>
+          ) : (
+            <div className="aspect-4/3 w-full rounded-xl bg-almond/50" />
+          )}
           <div className="mt-3 grid grid-cols-4 gap-3">
-            <div className="aspect-square rounded-lg bg-almond/50" />
-            <div className="aspect-square rounded-lg bg-almond/50" />
-            <div className="aspect-square rounded-lg bg-almond/50" />
-            <div className="aspect-square rounded-lg bg-almond/50" />
+            {[0, 1, 2, 3].map((i) =>
+              trailer.images[i] ? (
+                <div key={i} className="relative aspect-square overflow-hidden rounded-lg bg-almond/50">
+                  <Image src={trailer.images[i]} alt={trailer.name} fill sizes="140px" className="object-cover" />
+                </div>
+              ) : (
+                <div key={i} className="aspect-square rounded-lg bg-almond/50" />
+              ),
+            )}
           </div>
         </div>
 

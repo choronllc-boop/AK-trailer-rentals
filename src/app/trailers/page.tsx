@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { trailers } from "@/lib/site-data";
+import { getTrailers } from "@/lib/data";
 import TrailerGrid from "@/components/TrailerGrid";
 
 export const metadata: Metadata = {
@@ -7,7 +7,9 @@ export const metadata: Metadata = {
   description: "Browse our fleet of car haulers, utility trailers, log haulers, and enclosed cargo trailers.",
 };
 
-export default function TrailersPage() {
+export default async function TrailersPage() {
+  const trailers = await getTrailers();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <p className="text-sm font-semibold tracking-wide text-chestnut">CATALOG</p>

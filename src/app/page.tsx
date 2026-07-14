@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { blogPosts, trailers } from "@/lib/site-data";
+import { getBlogPosts, getTrailers } from "@/lib/data";
 import ServiceAreas from "@/components/ServiceAreas";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import TrailerGrid from "@/components/TrailerGrid";
 
-export default function Home() {
+export default async function Home() {
+  const [trailers, blogPosts] = await Promise.all([getTrailers(), getBlogPosts()]);
+
   return (
     <div className="flex flex-col gap-24 pb-24">
       <section className="bg-almond/40">

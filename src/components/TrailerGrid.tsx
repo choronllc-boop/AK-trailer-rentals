@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Trailer } from "@/lib/site-data";
 import TrailerAvailabilityModal from "./TrailerAvailabilityModal";
@@ -24,7 +25,19 @@ export default function TrailerGrid({
             className="group rounded-2xl border border-almond bg-white p-5 transition-colors hover:border-pumpkin"
           >
             <Link href={`/trailers/${trailer.slug}`}>
-              <div className="aspect-4/3 w-full rounded-xl bg-almond/50" />
+              {trailer.images[0] ? (
+                <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl bg-almond/50">
+                  <Image
+                    src={trailer.images[0]}
+                    alt={trailer.name}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-4/3 w-full rounded-xl bg-almond/50" />
+              )}
               <p className="mt-4 font-semibold text-coffee">{trailer.name}</p>
               <p className="mt-1 text-sm text-coffee/60">{trailer.tagline}</p>
               <p className="mt-3 text-sm font-semibold text-pumpkin">${trailer.pricePerDay}/day</p>
