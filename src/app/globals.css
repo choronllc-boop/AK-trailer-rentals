@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --color-coffee: #130303;
+  --color-mahogany: #2d080a;
+  --color-chestnut: #7c3626;
+  --color-pumpkin: #f5853f;
+  --color-almond: #ffcdbc;
+}
+
+@theme inline {
+  --color-coffee: var(--color-coffee);
+  --color-mahogany: var(--color-mahogany);
+  --color-chestnut: var(--color-chestnut);
+  --color-pumpkin: var(--color-pumpkin);
+  --color-almond: var(--color-almond);
+
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-cal-sans), var(--font-montserrat);
+}
+
+body {
+  background: #fff;
+  color: var(--color-coffee);
+}

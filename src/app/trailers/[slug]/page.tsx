@@ -1,0 +1,88 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { trailers } from "@/lib/site-data";
+
+export function generateStaticParams() {
+  return trailers.map((t) => ({ slug: t.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const trailer = trailers.find((t) => t.slug === slug);
+  if (!trailer) return {};
+  return {
+    title: `${trailer.name} | AK Trailer Rentals`,
+    description: trailer.description,
+  };
+}
+
+export default async function TrailerDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const trailer = trailers.find((t) => t.slug === slug);
+  if (!trailer) notFound();
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div className="grid gap-10 lg:grid-cols-2">
+        <div>
+          <Link href="/trailers" className="text-sm font-semibold text-pumpkin hover:text-chestnut">
+            ← Back to catalog
+          </Link>
+          <h1 className="mt-4 font-display text-4xl text-coffee">{trailer.name}</h1>
+          <p className="mt-1 text-coffee/60">{trailer.tagline}</p>
+          <p className="mt-4 text-2xl font-semibold text-coffee">
+            ${trailer.pricePerDay} <span className="text-base font-normal text-coffee/60">/ day</span>
+          </p>
+
+          <Link
+            href={`/book?trailer=${trailer.slug}`}
+            className="mt-6 inline-block rounded-full bg-pumpkin px-8 py-3 text-base font-semibold text-white hover:bg-chestnut"
+          >
+            Check Availability
+          </Link>
+
+          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {trailer.specs.map((spec) => (
+              <div key={spec.label}>
+                <p className="text-xs uppercase tracking-wide text-coffee/50">{spec.label}</p>
+                <p className="mt-1 font-semibold text-coffee">{spec.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-coffee/80">{trailer.description}</p>
+
+          <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-coffee/80">
+            {trailer.amenities.map((a) => (
+              <li key={a} className="flex items-center gap-2">
+                <span className="text-pumpkin">→</span> {a}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="col-span-2 aspect-4/3 rounded-2xl bg-almond/50" />
+          <div className="aspect-square rounded-2xl bg-almond/50" />
+          <div className="aspect-square rounded-2xl bg-almond/50" />
+        </div>
+      </div>
+
+      <div className="mt-16 border-t border-almond pt-10">
+        <p className="text-sm font-semibold text-pumpkin">★★★★★ 4.9 · 32 reviews</p>
+        <p className="mt-2 max-w-2xl text-coffee/70">
+          Reviews for this trailer sync live from Google — check the homepage for the latest.
+        </p>
+      </div>
+    </div>
+  );
+}
