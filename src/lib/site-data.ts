@@ -131,7 +131,7 @@ export const seedTrailers: Trailer[] = [
     description:
       "Our open-deck car hauler is built for moving a single vehicle, ATV, or small equipment across the Mat-Su Valley. Steel ramps and tie-down points on all four corners make loading straightforward.",
     amenities: ["Steel loading ramps", "4-corner tie-downs", "LED lighting", "Spare tire included"],
-    images: ["/trailers/car-hauler-1.jpg", "/trailers/car-hauler-2.jpg", "/trailers/car-hauler-3.jpg"],
+    images: [],
   },
   {
     slug: "log-hauler",
@@ -147,7 +147,7 @@ export const seedTrailers: Trailer[] = [
     description:
       "Built for hauling firewood, logs, and lumber around Southcentral Alaska. Reinforced stake pockets hold removable side rails for bulkier loads.",
     amenities: ["Removable side rails", "Stake pockets", "Heavy-duty deck", "Chain tie-downs"],
-    images: ["/trailers/log-hauler-1.jpg", "/trailers/log-hauler-2.jpg", "/trailers/log-hauler-3.jpg"],
+    images: [],
   },
   {
     slug: "utility-trailer",
@@ -163,7 +163,7 @@ export const seedTrailers: Trailer[] = [
     description:
       "A do-it-all trailer for yard cleanup, moving furniture, or small landscaping jobs. Light enough to tow with most SUVs and trucks.",
     amenities: ["Mesh side rails", "Rear ramp gate", "Tie-down loops", "Spare tire included"],
-    images: ["/trailers/utility-1.jpg", "/trailers/utility-2.jpg", "/trailers/utility-3.jpg"],
+    images: [],
   },
   {
     slug: "enclosed-cargo",
@@ -179,7 +179,7 @@ export const seedTrailers: Trailer[] = [
     description:
       "Keep your cargo dry and secure on the Parks Highway. Great for moving, storage, and hauling tools or equipment that needs to stay covered.",
     amenities: ["Lockable rear door", "Side entry door", "Interior tie-downs", "Weatherproof seal"],
-    images: ["/trailers/enclosed-1.jpg", "/trailers/enclosed-2.jpg", "/trailers/enclosed-3.jpg"],
+    images: [],
   },
 ];
 
