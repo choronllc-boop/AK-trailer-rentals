@@ -11,8 +11,6 @@
   --color-pumpkin: #9da3a4;
   /* Soft Blush — light section backgrounds/borders (was almond) */
   --color-almond: #ffdbda;
-  /* Pale Slate — page background */
-  --color-slate: #d5c5c8;
 }
 
 @theme inline {
@@ -21,14 +19,13 @@
   --color-chestnut: var(--color-chestnut);
   --color-pumpkin: var(--color-pumpkin);
   --color-almond: var(--color-almond);
-  --color-slate: var(--color-slate);
 
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-cal-sans), var(--font-montserrat);
 }
 
 body {
-  background: var(--color-slate);
+  background: #fff;
   color: var(--color-coffee);
 }
 
