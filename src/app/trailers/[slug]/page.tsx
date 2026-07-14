@@ -68,15 +68,15 @@ export default async function TrailerDetailPage({
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {trailer.specs.map((spec) => (
               <div key={spec.label}>
-                <p className="text-xs uppercase tracking-wide text-coffee/50">{spec.label}</p>
-                <p className="mt-1 font-semibold text-coffee">{spec.value}</p>
+                <p className="text-sm uppercase tracking-wide text-coffee/50">{spec.label}</p>
+                <p className="mt-1 text-lg font-semibold text-coffee">{spec.value}</p>
               </div>
             ))}
           </div>
 
-          <p className="mt-8 text-coffee/80">{trailer.description}</p>
+          <p className="mt-8 text-lg text-coffee/80">{trailer.description}</p>
 
-          <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-coffee/80">
+          <ul className="mt-6 grid grid-cols-2 gap-3 text-base text-coffee/80">
             {trailer.amenities.map((a) => (
               <li key={a} className="flex items-center gap-2">
                 <span className="text-pumpkin">→</span> {a}
@@ -92,7 +92,7 @@ export default async function TrailerDetailPage({
         </div>
       </div>
 
-      <div className="mt-16 max-w-2xl border-t border-almond pt-10">
+      <div className="mt-16 max-w-2xl">
         <p className="flex items-center gap-2 text-lg text-coffee">
           <span className="text-pumpkin">★</span>
           <span className="font-bold">{trailer.rating}</span>
