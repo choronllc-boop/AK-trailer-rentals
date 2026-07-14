@@ -78,7 +78,7 @@ export default async function Home() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="rounded-2xl border border-almond bg-white p-6 hover:border-pumpkin"
+              className="rounded-2xl border border-black bg-white p-6 hover:border-pumpkin"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-chestnut">
                 {post.category}

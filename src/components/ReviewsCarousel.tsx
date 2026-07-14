@@ -8,7 +8,7 @@ const CARD_WIDTH = "w-[170px]";
 // review length, instead of stretching/shrinking to fit its own text.
 function ReviewCard({ review }: { review: (typeof facebookReviews)[number] }) {
   return (
-    <div className={`${CARD_WIDTH} flex h-44 shrink-0 flex-col rounded-xl border border-almond bg-white p-4`}>
+    <div className={`${CARD_WIDTH} flex h-44 shrink-0 flex-col rounded-xl border border-black bg-white p-4`}>
       <p className="text-xs font-semibold text-pumpkin">👍 Recommends AK Trailer Rentals</p>
       <p className="mt-2 line-clamp-5 text-xs text-coffee/80">&ldquo;{review.quote}&rdquo;</p>
       <p className="mt-auto pt-2 text-xs font-semibold text-coffee">{review.name}</p>

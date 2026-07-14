@@ -22,7 +22,7 @@ export default function TrailerGrid({
         {trailers.map((trailer) => (
           <div
             key={trailer.slug}
-            className="group rounded-2xl border border-almond bg-white p-5 transition-colors hover:border-pumpkin"
+            className="group rounded-2xl border border-black bg-white p-5 transition-colors hover:border-pumpkin"
           >
             <Link href={`/trailers/${trailer.slug}`}>
               {trailer.images[0] ? (
