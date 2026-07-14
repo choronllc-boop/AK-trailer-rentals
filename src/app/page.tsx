@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { blogPosts, facebookReviews, trailers } from "@/lib/site-data";
+import { blogPosts, trailers } from "@/lib/site-data";
 import ServiceAreas from "@/components/ServiceAreas";
+import ReviewsCarousel from "@/components/ReviewsCarousel";
 
 export default function Home() {
   return (
@@ -65,24 +66,13 @@ export default function Home() {
         <ServiceAreas />
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="flex items-baseline justify-between">
+      <section>
+        <div className="mx-auto flex w-full max-w-6xl items-baseline justify-between px-4 sm:px-6">
           <h2 className="font-display text-2xl text-coffee sm:text-3xl">What renters say</h2>
           <p className="text-sm text-coffee/60">Reviews via Facebook</p>
         </div>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {facebookReviews.map((review) => (
-            <div key={review.name} className="rounded-2xl border border-almond bg-white p-6">
-              <p className="text-sm font-semibold text-pumpkin">👍 Recommends AK Trailer Rentals</p>
-              <p className="mt-3 text-coffee/80">&ldquo;{review.quote}&rdquo;</p>
-              <p className="mt-4 text-sm font-semibold text-coffee">{review.name}</p>
-              {review.reply && (
-                <p className="mt-3 border-l-2 border-almond pl-3 text-sm text-coffee/60">
-                  <span className="font-semibold text-coffee">AK Trailer Rentals:</span> {review.reply}
-                </p>
-              )}
-            </div>
-          ))}
+        <div className="mt-8">
+          <ReviewsCarousel />
         </div>
       </section>
 
