@@ -15,12 +15,22 @@ function ReviewCard({ review }: { review: (typeof facebookReviews)[number] }) {
   );
 }
 
+// Repeat the review set enough times that one half of the track is wider
+// than any screen, so the loop point is never visible.
+const MIN_CARDS_PER_HALF = 16;
+
 export default function ReviewsCarousel() {
-  const cards = [...facebookReviews, ...facebookReviews];
+  const repeats = Math.max(1, Math.ceil(MIN_CARDS_PER_HALF / facebookReviews.length));
+  const half = Array.from({ length: repeats }, () => facebookReviews).flat();
+  const cards = [...half, ...half];
+  const durationSeconds = half.length * 4;
 
   return (
     <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-      <div className="animate-marquee flex w-max gap-4">
+      <div
+        className="animate-marquee flex w-max gap-4"
+        style={{ animationDuration: `${durationSeconds}s` }}
+      >
         {cards.map((review, i) => (
           <ReviewCard key={`${review.name}-${i}`} review={review} />
         ))}
