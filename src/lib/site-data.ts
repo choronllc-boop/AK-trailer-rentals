@@ -319,4 +319,104 @@ The same fundamentals apply whether you're hauling an ATV, a side-by-side, or a 
     date: "2026-07-08",
     category: "Guides",
   },
+  {
+    slug: "trailer-rental-delivery",
+    title: "Trailer Rental With Delivery: How Drop-Off to Your House or Job Site Works",
+    excerpt:
+      "Yes, we deliver. Here's how trailer delivery works across Salina and central Kansas — radius, fees, and what to expect on drop-off day.",
+    body: `Q: Can a rental trailer be delivered directly to my house or job site?
+A: Yes. We deliver trailers throughout the Salina area and central Kansas for an additional fee based on distance. You pick the trailer and dates, select "delivery" on the booking form, and we confirm the delivery cost upfront before anything is charged — no surprises rolled into the final bill. On the day of the rental we tow the trailer to your address, position it where you want it (driveway, curb, or a spot on the job site), and it's ready to load. When your rental period ends, we come pick it back up. You never have to hook up to our lot at all.
+
+Delivery makes the most sense in a few situations. If your tow vehicle is busy — say your truck is loaded with tools and materials for the job the trailer is supporting — delivery means the trailer shows up without you burning a trip. If you're coordinating a move and the schedule is tight, having the trailer sitting in your driveway the night before beats adding a pickup errand to moving day. And for job sites, delivery lets a crew keep working while the equipment comes to them.
+
+Q: How much does trailer delivery cost?
+A: The fee is based on distance from our Salina location, quoted when you book. Close-in deliveries around Salina cost less than runs to the far edge of central Kansas, and we confirm the exact number with you before the rental is locked in. Call us at 785-416-0279 with your address and dates and we can quote delivery in the same conversation.
+
+Q: How does contactless drop-off work?
+A: Simple: tell us where you want the trailer positioned, and we'll place it there whether or not you're home. We chock it, leave it ready to hook up or load, and send you a confirmation. Pickup at the end of the rental works the same way in reverse — leave the trailer where we dropped it (or wherever we agree), and we'll collect it. The whole rental can happen without a face-to-face handoff if that's what your schedule needs.
+
+Longer-term rentals pair especially well with delivery. If you're keeping a trailer for a week or more on a project, one delivery and one pickup replaces every trip you'd otherwise make to our lot. Tell us the project timeline when you book and we'll set the schedule around it.`,
+    date: "2026-07-15",
+    category: "Guides",
+  },
+  {
+    slug: "hitch-and-wiring-requirements",
+    title: "What Hitch and Wiring Do You Need to Rent a Car Hauler?",
+    excerpt:
+      "Ball size, hitch class, and trailer wiring explained in plain English — so you arrive at the lot with the right equipment the first time.",
+    body: `Q: What kind of hitch and wiring do I need to rent a car hauler?
+A: You need three things: a receiver hitch rated for the loaded weight of the trailer (Class IV or higher for a loaded car hauler), a ball mount with the correct ball size for the trailer's coupler, and a trailer wiring connector that matches the trailer's plug. When you book with us, we tell you the exact ball size and connector type for the trailer you're renting, so the only homework is checking what your tow vehicle already has. Get those three right and hookup takes five minutes.
+
+Start with the hitch itself. The receiver on your truck or SUV has a weight rating stamped on a label — a Class III hitch typically handles up to around 8,000 lbs towing, while Class IV and above handle the kind of weight a loaded car hauler represents. Remember it's the loaded weight that counts: our 22-ft wood deck car hauler can carry up to 9,900 lbs of cargo, so trailer plus vehicle can easily exceed what a light-duty hitch is rated for. Check the label on your receiver, not just a guess about what the truck "should" handle.
+
+Q: What is a four-way flat trailer wiring connector?
+A: A four-way flat is the small, flat, four-pin plug that handles the basics: running lights, brake lights, and left and right turn signals. It's the most common connector on light trailers, and most trucks and SUVs with a factory tow package have one (or the larger round seven-way that includes it). Heavier trailers with electric brakes use the seven-way round connector, because the extra pins carry the brake signal and a charging line. When you book, we'll tell you whether the trailer you're renting uses a four-way or seven-way connector and whether it has electric brakes — if it does, your tow vehicle also needs a brake controller, which many modern trucks with tow packages have built in.
+
+Q: What if my vehicle has the wrong connector?
+A: Adapters solve most mismatches in seconds — a seven-way-to-four-way adapter (or the reverse) costs little and plugs straight in. The one thing an adapter can't fake is a brake controller: if the trailer has electric brakes and your vehicle has no controller, the trailer brakes simply won't activate. If you're not sure what your vehicle has, snap a photo of your hitch and the connector socket and text or call us at 785-416-0279 before pickup day — we'll tell you exactly what you need, and help you get sorted with the right ball mount or adapter so nothing holds up your rental.
+
+One last pre-trip check that costs nothing: with the trailer hooked up, walk around it and confirm running lights, both turn signals, and brake lights all fire before you pull out. We do this with you at pickup, and it's worth repeating any time you stop for fuel on a long haul.`,
+    date: "2026-06-30",
+    category: "Guides",
+  },
+  {
+    slug: "trailer-rental-insurance",
+    title: "Does Your Auto Insurance Cover a Rental Trailer? Liability, Damage, and Flat Tires",
+    excerpt:
+      "How personal auto policies typically treat a towed rental trailer, what they don't cover, and who handles breakdowns during your rental.",
+    body: `Q: Does my auto insurance cover a rental trailer if I get in an accident?
+A: Typically your personal auto policy's liability coverage extends to a trailer you're towing — meaning damage you cause to other people or property while towing is usually covered the same as if you weren't towing. What most personal policies do NOT automatically cover is physical damage to the rental trailer itself, or to the cargo you loaded on it. Those are separate questions, and the answer varies by insurer and policy. Before you rent, a five-minute call to your insurance agent with one question — "does my policy cover physical damage to a rented trailer I'm towing?" — tells you exactly where you stand. This isn't insurance advice; it's the question that gets you the real answer for your specific policy.
+
+The distinction that trips people up is trailer versus load. The trailer is our equipment; the load is your property. Even when a policy covers damage to a borrowed or rented trailer, the cargo strapped to it — your car, your equipment, your furniture — generally falls under different coverage entirely (comprehensive on the hauled vehicle, homeowners for household goods, or inland marine coverage for business equipment). If what you're hauling is valuable, confirm its coverage separately from the trailer question.
+
+Q: What happens if the trailer gets damaged during my rental?
+A: Talk to us when you book and we'll walk through the options for your rental, including what you're responsible for and what coverage makes sense for your situation. The honest answer is that arrangements depend on the trailer and the trip — a weekend local haul and a multi-state vehicle transport are different risk pictures. What we promise across the board: everything is spelled out before you sign, not discovered after something goes wrong.
+
+Q: Who handles a flat tire or breakdown during the rental period?
+A: We do — call us and we'll get it handled. Routine wear items like tires are our equipment and our responsibility, not something you should be stranded over. One of our renters had a blowout five hours from Salina, and we had someone replacing the tire within 45 minutes, no questions asked. We maintain our trailers between every rental — bearings, lights, tires, brakes — specifically so breakdowns stay rare, and our line at 785-416-0279 is answered during emergency hours (8 AM to 8 PM) for exactly these situations.
+
+The short version: your liability coverage likely follows you, the trailer itself and your cargo need a direct answer from your insurer, and mechanical problems on the road are our job to fix. Make the call to your agent before pickup day, and you'll tow with the whole picture settled.`,
+    date: "2026-06-03",
+    category: "Guides",
+  },
+  {
+    slug: "long-term-business-trailer-rental",
+    title: "Long-Term Trailer Rentals for Contractors: The Business Case for Renting Over Owning",
+    excerpt:
+      "Why landscapers, roofers, and local tradesmen rent trailers long-term instead of buying — costs, taxes, and how extended agreements work.",
+    body: `Q: Can I rent a trailer for my business on a long-term basis?
+A: Yes. We work with contractors, landscapers, roofers, and other local businesses on extended rentals — weeks or months at a time — around Salina and central Kansas. Call us at 785-416-0279 with your timeline and what you're hauling, and we'll put together an arrangement for the duration you actually need, including delivery to your job site so the trailer is working from day one. For a business that needs a trailer for a season or a specific contract, a long-term rental gets you the equipment without the capital outlay of buying.
+
+The rent-versus-own math is worth running honestly. Owning a trailer means the purchase price up front, plus registration, insurance on the trailer, storage space when it's idle, tires, bearings, brakes, lights, and rust — and trailers spend most of their life depreciating in a yard. Renting converts all of that into one predictable expense that exists only when the trailer is earning its keep on a job. If your trailer need is year-round and daily, buying eventually wins; if it's seasonal, project-based, or fluctuating with your contract load, renting usually pencils out better.
+
+Q: Are trailer rental costs tax-deductible for a business?
+A: Rental payments for equipment used in your business are generally deductible as an ordinary business expense in the year you pay them — a simpler picture than ownership, where you're depreciating an asset over years and tracking maintenance costs separately. As with anything tax-related, your accountant gets the final word on your situation, but "clean, fully deductible operating expense" is a real part of why trades businesses rent equipment they could technically afford to buy.
+
+Q: How do extended rental agreements work?
+A: Simpler than you'd expect: we agree on the trailer, the duration, and the rate up front, and longer commitments get better economics than stringing together day rentals. You keep the trailer at your yard or job site for the whole term — no returning it between jobs — and we stay responsible for keeping it roadworthy. If a tire goes down or a light goes out mid-term, that's our problem to fix, not a line item on your books. When one job wraps and the next one starts, the trailer just moves with you.
+
+If you run a crew and find yourself borrowing, improvising, or overbooking a single owned trailer, that's usually the sign a standing rental would pay for itself. Tell us what your season looks like and we'll figure out what makes sense.`,
+    date: "2026-05-06",
+    category: "Guides",
+  },
+  {
+    slug: "weigh-stations-rental-trailer",
+    title: "Do You Have to Stop at Weigh Stations With a Rental Trailer?",
+    excerpt:
+      "The weigh station question, answered for personal vehicles towing rental trailers — what the signs mean, who must stop, and how to stay legal state to state.",
+    body: `Q: Do I have to stop at weigh stations with a rental trailer?
+A: If you're a private individual towing a rental trailer with your personal pickup or SUV for personal use — moving your own household, hauling your own car — you are generally not required to stop at weigh stations in most states, including Kansas. Weigh stations primarily exist to check commercial motor vehicles. The key variables are whether the trip is commercial and how much the combination weighs: signs that say "All trucks must stop" or state-specific weight thresholds can pull larger private rigs in. Read the actual sign as you approach — each station posts who must enter — and when a sign is ambiguous about your rig, pulling in costs you five minutes while blowing past a required stop can cost you a fine.
+
+The commercial distinction matters more than the trailer itself. The same truck and rental trailer combination can be exempt on Saturday (moving your daughter's furniture) and required to stop on Monday (hauling materials for your paying customer), because using the rig in commerce changes its classification. If you're renting for business purposes, assume commercial rules may apply to you and check the requirements for each state on your route before the trip.
+
+Q: What are the weight rules for towing across state lines?
+A: Every state sets its own weigh station rules, and they genuinely differ — some states call in vehicles over 10,000 lbs GVWR, others only regulate commercial carriers, and agricultural exceptions vary. Before an interstate haul, spend ten minutes checking the DOT website for each state you'll cross; search the state name plus "weigh station requirements." Also keep your rig's numbers in your head: the trailer's GVWR (we'll give you the exact figure for the trailer you rent), your truck's GVWR, and a realistic estimate of your cargo weight. Knowing your combined weight turns every threshold sign from a guess into a quick yes-or-no.
+
+Q: What paperwork should I carry when towing a rental trailer out of state?
+A: Carry the rental agreement, your driver's license, proof of insurance, and the trailer's registration information — we provide the trailer documentation when you pick up or take delivery. If an officer or weigh station attendant asks why you're towing a trailer registered to someone else, the rental agreement answers the question on the spot. Keep it in the glovebox, not packed in a box on the trailer.
+
+The bottom line for most of our renters: personal trip, personal vehicle, standard rental trailer — drive past the weigh station legally and confidently. Commercial trip or an unusually heavy combination — check the states on your route first, and call us at 785-416-0279 if you want the exact weight specs for your trailer before you leave.`,
+    date: "2026-04-08",
+    category: "Guides",
+  },
 ];

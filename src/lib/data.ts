@@ -20,7 +20,7 @@ async function ensureSeeded() {
   // Version-gated so new seed posts reach an already-seeded database once,
   // without resurrecting posts the admin has deleted. Bump when seedBlogPosts
   // gains new entries.
-  const BLOG_SEED_VERSION = "2";
+  const BLOG_SEED_VERSION = "3";
   const [seedMeta] = await sql`SELECT value FROM meta WHERE key = 'blog_seed_version'`;
   if (seedMeta?.value !== BLOG_SEED_VERSION) {
     for (const p of seedBlogPosts) {
