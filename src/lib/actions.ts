@@ -34,19 +34,31 @@ function revalidateBlog() {
   revalidatePath("/blog/[slug]", "page");
 }
 
-export async function uploadImage(formData: FormData): Promise<string> {
-  const file = formData.get("file") as File | null;
-  if (!file || file.size === 0) throw new Error("No file provided");
-  // Blob stores created with a custom name get a prefixed variable
-  // (e.g. blob_READ_WRITE_TOKEN) that put() won't find on its own.
-  const token =
-    process.env.BLOB_READ_WRITE_TOKEN ??
-    Object.entries(process.env).find(([k]) => k.endsWith("_READ_WRITE_TOKEN"))?.[1];
-  const blob = await put(`trailers/${Date.now()}-${file.name}`, file, {
-    access: "public",
-    token,
-  });
-  return blob.url;
+// Returns the error as data — thrown errors get masked in production,
+// which leaves the owner staring at a useless generic message.
+export async function uploadImage(formData: FormData): Promise<{ url?: string; error?: string }> {
+  try {
+    const file = formData.get("file") as File | null;
+    if (!file || file.size === 0) return { error: "No file provided" };
+    // Blob stores created with a custom name get a prefixed variable
+    // (e.g. blob_READ_WRITE_TOKEN) that put() won't find on its own.
+    const token =
+      process.env.BLOB_READ_WRITE_TOKEN ??
+      Object.entries(process.env).find(([k]) => k.endsWith("_READ_WRITE_TOKEN"))?.[1];
+    const blob = await put(`trailers/${Date.now()}-${file.name}`, file, {
+      access: "public",
+      token,
+    });
+    return { url: blob.url };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Upload failed";
+    // Env var NAMES (never values) that look storage-related, to make
+    // misconfigured Blob stores diagnosable from the admin UI.
+    const names = Object.keys(process.env)
+      .filter((k) => /blob|token|store/i.test(k))
+      .join(", ");
+    return { error: `${msg} — storage-related settings found: ${names || "none"}` };
+  }
 }
 
 export async function saveTrailer(trailer: Trailer, originalSlug?: string) {

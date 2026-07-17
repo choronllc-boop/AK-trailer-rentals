@@ -295,7 +295,9 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
       for (const file of Array.from(files)) {
         const fd = new FormData();
         fd.set("file", file);
-        urls.push(await uploadImage(fd));
+        const res = await uploadImage(fd);
+        if (res.error || !res.url) throw new Error(res.error ?? "Upload failed");
+        urls.push(res.url);
       }
       return urls;
     } catch (err) {
