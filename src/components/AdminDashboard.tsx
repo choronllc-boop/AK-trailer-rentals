@@ -280,11 +280,14 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
   const [details, setDetails] = useState<{ label: string; value: string }[]>(
     trailer?.specs.length ? trailer.specs : [{ label: "", value: "" }],
   );
+  // Photo slots: images[0] is the main photo, the rest are the extra gallery.
+  const [mainPhoto, setMainPhoto] = useState<string | null>(trailer?.images[0] ?? null);
+  const [extraPhotos, setExtraPhotos] = useState<string[]>(trailer?.images.slice(1) ?? []);
   const [uploading, setUploading] = useState(false);
   const [formError, setFormError] = useState("");
 
-  async function handleUpload(files: FileList | null) {
-    if (!files || files.length === 0) return;
+  async function uploadFiles(files: FileList | null): Promise<string[]> {
+    if (!files || files.length === 0) return [];
     setUploading(true);
     setFormError("");
     try {
@@ -294,12 +297,28 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
         fd.set("file", file);
         urls.push(await uploadImage(fd));
       }
-      setForm((f) => ({ ...f, images: [...f.images, ...urls] }));
+      return urls;
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : "Upload failed");
+      const msg = err instanceof Error ? err.message : "Upload failed";
+      setFormError(
+        /token/i.test(msg)
+          ? "Photo storage isn't set up yet. In Vercel: Storage → Create Database → Blob, then redeploy the site."
+          : msg,
+      );
+      return [];
     } finally {
       setUploading(false);
     }
+  }
+
+  async function handleMainUpload(files: FileList | null) {
+    const urls = await uploadFiles(files);
+    if (urls[0]) setMainPhoto(urls[0]);
+  }
+
+  async function handleExtraUpload(files: FileList | null) {
+    const urls = await uploadFiles(files);
+    if (urls.length) setExtraPhotos((prev) => [...prev, ...urls]);
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -312,6 +331,7 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
             ...form,
             // The web address is always built from the name on the server.
             slug: "",
+            images: [...(mainPhoto ? [mainPhoto] : []), ...extraPhotos],
             specs: details
               .map((d) => ({ label: d.label.trim(), value: d.value.trim() }))
               .filter((d) => d.label && d.value),
@@ -384,33 +404,84 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
         </label>
       </section>
 
-      <section className="space-y-3">
+      <section className="space-y-6">
         <StepHeading n={2} title="Photos" />
-        <Hint>Pick photos from your computer or phone. The first photo is the main one.</Hint>
-        <div className="grid grid-cols-4 gap-3">
-          {form.images.map((src, i) => (
-            <div key={src} className="group relative aspect-square overflow-hidden rounded-lg bg-almond/50">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" loading="lazy" className="size-full object-cover" />
+
+        <div className="rounded-2xl border border-almond p-4">
+          <p className="font-semibold text-coffee">Main photo</p>
+          <Hint>
+            This is the cover photo — it shows on the trailer box on the Trailers page, and as the
+            big picture at the top of the trailer&apos;s own page.
+          </Hint>
+          {mainPhoto ? (
+            <div className="mt-3 flex items-end gap-3">
+              <div className="relative aspect-4/3 w-48 overflow-hidden rounded-lg bg-almond/50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={mainPhoto} alt="" className="size-full object-cover" />
+                <span className="absolute left-1 top-1 rounded-full bg-pumpkin px-2 py-0.5 text-xs font-semibold text-white">
+                  Main photo
+                </span>
+              </div>
               <button
                 type="button"
-                aria-label="Remove photo"
-                onClick={() => setForm((f) => ({ ...f, images: f.images.filter((_, idx) => idx !== i) }))}
-                className="absolute right-1 top-1 flex size-6 items-center justify-center rounded-full bg-white text-xs text-coffee opacity-0 shadow group-hover:opacity-100"
+                onClick={() => setMainPhoto(null)}
+                className="rounded-full border border-almond px-4 py-2 text-sm text-chestnut hover:border-chestnut"
               >
-                ✕
+                Remove
               </button>
             </div>
-          ))}
+          ) : (
+            <p className="mt-3 text-sm text-chestnut">No main photo yet — pick one below.</p>
+          )}
+          <label className="mt-3 block text-sm text-coffee">
+            {mainPhoto ? "Choose a different main photo:" : "Choose the main photo:"}
+            <input
+              type="file"
+              accept="image/*"
+              disabled={uploading}
+              onChange={(e) => handleMainUpload(e.target.files)}
+              className="mt-1 block text-sm text-coffee"
+            />
+          </label>
         </div>
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          disabled={uploading}
-          onChange={(e) => handleUpload(e.target.files)}
-          className="text-sm text-coffee"
-        />
+
+        <div className="rounded-2xl border border-almond p-4">
+          <p className="font-semibold text-coffee">More photos</p>
+          <Hint>
+            These show as the smaller pictures next to the main photo when a customer opens the
+            trailer&apos;s page. Add as many as you like.
+          </Hint>
+          {extraPhotos.length > 0 && (
+            <div className="mt-3 grid grid-cols-4 gap-3">
+              {extraPhotos.map((src, i) => (
+                <div key={src} className="relative aspect-square overflow-hidden rounded-lg bg-almond/50">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt="" loading="lazy" className="size-full object-cover" />
+                  <button
+                    type="button"
+                    aria-label="Remove photo"
+                    onClick={() => setExtraPhotos((prev) => prev.filter((_, idx) => idx !== i))}
+                    className="absolute right-1 top-1 flex size-6 items-center justify-center rounded-full bg-white text-xs text-coffee shadow"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+          <label className="mt-3 block text-sm text-coffee">
+            Add more photos (you can pick several at once):
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              disabled={uploading}
+              onChange={(e) => handleExtraUpload(e.target.files)}
+              className="mt-1 block text-sm text-coffee"
+            />
+          </label>
+        </div>
+
         {uploading && <p className="text-sm text-coffee/60">Uploading…</p>}
       </section>
 

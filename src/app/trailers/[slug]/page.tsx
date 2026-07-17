@@ -77,14 +77,15 @@ export default async function TrailerDetailPage({
           ) : (
             <div className="col-span-2 aspect-4/3 rounded-2xl bg-almond/50" />
           )}
-          {[1, 2].map((i) =>
-            trailer.images[i] ? (
-              <div key={i} className="relative aspect-square overflow-hidden rounded-2xl bg-almond/50">
-                <Image src={trailer.images[i]} alt={trailer.name} fill sizes="(min-width: 1024px) 280px, 50vw" className="object-cover" />
-              </div>
-            ) : (
-              <div key={i} className="aspect-square rounded-2xl bg-almond/50" />
-            ),
+          {Array.from({ length: Math.max(2, trailer.images.length - 1) }, (_, i) => trailer.images[i + 1]).map(
+            (src, i) =>
+              src ? (
+                <div key={i} className="relative aspect-square overflow-hidden rounded-2xl bg-almond/50">
+                  <Image src={src} alt={trailer.name} fill sizes="(min-width: 1024px) 280px, 50vw" className="object-cover" />
+                </div>
+              ) : (
+                <div key={i} className="aspect-square rounded-2xl bg-almond/50" />
+              ),
           )}
         </div>
       </div>
