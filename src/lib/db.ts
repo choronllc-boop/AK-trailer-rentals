@@ -3,7 +3,9 @@ import postgres from "postgres";
 // Any standard Postgres connection string works here — Vercel Postgres,
 // Neon, Supabase, etc. all provide one. Set DATABASE_URL in .env.local
 // for local dev and in the Vercel project's environment variables.
-const connectionString = process.env.DATABASE_URL;
+// Vercel's Neon/Postgres integrations name the variable POSTGRES_URL;
+// accept either so no manual renaming is needed in the dashboard.
+const connectionString = process.env.DATABASE_URL ?? process.env.POSTGRES_URL;
 
 export const sql = connectionString
   ? postgres(connectionString, { ssl: "require" })
