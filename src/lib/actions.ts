@@ -1,10 +1,39 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { createHash } from "node:crypto";
 import { put } from "@vercel/blob";
 import { sql, initSchema } from "./db";
 import type { Trailer, BlogPost } from "./site-data";
+
+// Fallback only used when ADMIN_PASSWORD isn't set in the environment.
+// This constant never reaches the client because this file is "use server".
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "MXyc6loroJhijsOIGWFZgSvQ";
+const ADMIN_COOKIE = "ak_admin";
+
+function adminCookieValue() {
+  return createHash("sha256").update(ADMIN_PASSWORD).digest("hex");
+}
+
+export async function adminLogin(password: string): Promise<{ ok?: boolean; error?: string }> {
+  if (password !== ADMIN_PASSWORD) {
+    return { error: "Incorrect password." };
+  }
+  (await cookies()).set(ADMIN_COOKIE, adminCookieValue(), {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+  });
+  return { ok: true };
+}
+
+export async function isAdminLoggedIn(): Promise<boolean> {
+  const cookie = (await cookies()).get(ADMIN_COOKIE)?.value;
+  return cookie === adminCookieValue();
+}
 
 function requireDb() {
   if (!sql) {

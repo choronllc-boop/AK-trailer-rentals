@@ -1,10 +1,15 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { Trailer } from "@/lib/site-data";
 import { submitForm } from "@/lib/actions";
 
 export default function ContactForm({ trailers }: { trailers: Trailer[] }) {
+  const searchParams = useSearchParams();
+  const preselectedTrailer = searchParams.get("trailer") ?? undefined;
+  const prefillPickup = searchParams.get("pickup") ?? undefined;
+  const prefillReturn = searchParams.get("return") ?? undefined;
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -63,45 +68,63 @@ export default function ContactForm({ trailers }: { trailers: Trailer[] }) {
         </div>
       </div>
 
+      <p className="text-xs text-coffee/60">Fields marked with * are optional.</p>
+
       <div>
         <label className="block text-sm font-semibold text-coffee" htmlFor="c-email">
-          Email
+          Email *
         </label>
         <input
           id="c-email"
           name="email"
           type="email"
-          required
           className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
         />
       </div>
 
+      <div>
+        <label className="block text-sm font-semibold text-coffee" htmlFor="c-trailer">
+          Trailer type needed
+        </label>
+        <select
+          id="c-trailer"
+          name="trailerType"
+          defaultValue={preselectedTrailer}
+          className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
+        >
+          {trailers.map((t) => (
+            <option key={t.slug} value={t.slug}>
+              {t.name}
+            </option>
+          ))}
+          <option value="not-sure">Not sure yet</option>
+        </select>
+      </div>
+
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label className="block text-sm font-semibold text-coffee" htmlFor="c-trailer">
-            Trailer type needed
-          </label>
-          <select
-            id="c-trailer"
-            name="trailerType"
-            className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
-          >
-            {trailers.map((t) => (
-              <option key={t.slug} value={t.slug}>
-                {t.name}
-              </option>
-            ))}
-            <option value="not-sure">Not sure yet</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-semibold text-coffee" htmlFor="c-when">
-            When do you need it?
+          <label className="block text-sm font-semibold text-coffee" htmlFor="c-pickup">
+            Pickup date
           </label>
           <input
-            id="c-when"
-            name="whenNeeded"
+            id="c-pickup"
+            name="pickupDate"
             type="date"
+            required
+            defaultValue={prefillPickup}
+            className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-semibold text-coffee" htmlFor="c-return">
+            Return date
+          </label>
+          <input
+            id="c-return"
+            name="returnDate"
+            type="date"
+            required
+            defaultValue={prefillReturn}
             className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
           />
         </div>

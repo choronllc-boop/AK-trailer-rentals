@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTrailers, getBlogPosts } from "@/lib/data";
 import { sql } from "@/lib/db";
+import { isAdminLoggedIn } from "@/lib/actions";
 import AdminDashboard from "@/components/AdminDashboard";
 
 export const metadata: Metadata = {
@@ -13,6 +14,17 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const [trailers, posts] = await Promise.all([getTrailers(), getBlogPosts()]);
-  return <AdminDashboard initialTrailers={trailers} initialPosts={posts} dbConnected={sql !== null} />;
+  const [trailers, posts, loggedIn] = await Promise.all([
+    getTrailers(),
+    getBlogPosts(),
+    isAdminLoggedIn(),
+  ]);
+  return (
+    <AdminDashboard
+      initialTrailers={trailers}
+      initialPosts={posts}
+      dbConnected={sql !== null}
+      loggedIn={loggedIn}
+    />
+  );
 }

@@ -116,8 +116,13 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-6xl px-4 py-6 text-center text-xs text-white/50 sm:px-6">
-          © {new Date().getFullYear()} {business.name}. All rights reserved.
+        <p className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-6 text-center text-xs text-white/50 sm:flex-row sm:justify-between sm:px-6">
+          <span>
+            © {new Date().getFullYear()} {business.name}. All rights reserved.
+          </span>
+          <Link href="/privacy" className="hover:text-pumpkin">
+            Privacy Policy
+          </Link>
         </p>
       </div>
     </footer>

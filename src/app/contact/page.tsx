@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { business } from "@/lib/site-data";
 import { getTrailers } from "@/lib/data";
 import ContactForm from "@/components/ContactForm";
@@ -51,7 +52,9 @@ export default async function ContactPage() {
           <div className="mt-8 aspect-video w-full rounded-2xl bg-almond/50" />
         </div>
 
-        <ContactForm trailers={trailers} />
+        <Suspense>
+          <ContactForm trailers={trailers} />
+        </Suspense>
       </div>
     </div>
   );

@@ -3,9 +3,14 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { Trailer, BlogPost } from "@/lib/site-data";
-import { saveTrailer, deleteTrailer, saveBlogPost, deleteBlogPost, uploadImage } from "@/lib/actions";
-
-const DEMO_PASSWORD = "demo1234";
+import {
+  adminLogin,
+  saveTrailer,
+  deleteTrailer,
+  saveBlogPost,
+  deleteBlogPost,
+  uploadImage,
+} from "@/lib/actions";
 
 type Tab = "catalog" | "blog";
 
@@ -30,33 +35,36 @@ export default function AdminDashboard({
   initialTrailers,
   initialPosts,
   dbConnected,
+  loggedIn,
 }: {
   initialTrailers: Trailer[];
   initialPosts: BlogPost[];
   dbConnected: boolean;
+  loggedIn: boolean;
 }) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   if (!loggedIn) {
     return (
       <form
-        className="mx-auto mt-24 max-w-sm space-y-4 px-4"
+        className="mx-auto mt-24 max-w-sm space-y-4 px-4 pb-32"
         onSubmit={(e) => {
           e.preventDefault();
-          if (password === DEMO_PASSWORD) {
-            setLoggedIn(true);
-            setError("");
-          } else {
-            setError("Incorrect password. Try \"demo1234\" for this preview.");
-          }
+          setError("");
+          startTransition(async () => {
+            const res = await adminLogin(password);
+            if (res.ok) {
+              router.refresh();
+            } else {
+              setError(res.error ?? "Incorrect password.");
+            }
+          });
         }}
       >
         <h1 className="font-display text-3xl text-coffee">Admin Login</h1>
-        <p className="text-sm text-coffee/60">
-          Demo only — this login is not production-secure. Password: <code>demo1234</code>
-        </p>
         <input
           type="password"
           value={password}
@@ -67,9 +75,10 @@ export default function AdminDashboard({
         {error && <p className="text-sm text-chestnut">{error}</p>}
         <button
           type="submit"
-          className="w-full rounded-full bg-pumpkin px-8 py-3 text-base font-semibold text-white hover:bg-chestnut"
+          disabled={isPending}
+          className="w-full rounded-full bg-pumpkin px-8 py-3 text-base font-semibold text-white hover:bg-chestnut disabled:opacity-50"
         >
-          Log In
+          {isPending ? "Logging in…" : "Log In"}
         </button>
       </form>
     );

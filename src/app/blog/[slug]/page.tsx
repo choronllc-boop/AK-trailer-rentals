@@ -3,6 +3,34 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getBlogPost, getBlogPosts } from "@/lib/data";
 
+// Parses "Q: ..." / "A: ..." line pairs out of a post body for FAQPage JSON-LD.
+function extractFaqs(body: string): { question: string; answer: string }[] {
+  const lines = body.split("\n");
+  const faqs: { question: string; answer: string }[] = [];
+  let question: string | null = null;
+  let answer: string[] = [];
+  let inAnswer = false;
+
+  for (const line of lines) {
+    if (line.startsWith("Q: ")) {
+      if (question) faqs.push({ question, answer: answer.join(" ").trim() });
+      question = line.slice(3).trim();
+      answer = [];
+      inAnswer = false;
+    } else if (line.startsWith("A: ")) {
+      answer.push(line.slice(3).trim());
+      inAnswer = true;
+    } else if (inAnswer && line.trim()) {
+      answer.push(line.trim());
+    } else if (!line.trim()) {
+      inAnswer = false;
+    }
+  }
+  if (question) faqs.push({ question, answer: answer.join(" ").trim() });
+
+  return faqs.filter((f) => f.question && f.answer);
+}
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((p) => ({ slug: p.slug }));
@@ -28,8 +56,28 @@ export default async function BlogPostPage({
   const post = await getBlogPost(slug);
   if (!post) notFound();
 
+  const faqs = extractFaqs(post.body);
+  const faqJsonLd =
+    faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }
+      : null;
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <Link href="/blog" className="text-sm font-semibold text-pumpkin hover:text-chestnut">
         ← Back to blog
       </Link>
