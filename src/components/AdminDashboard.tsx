@@ -440,7 +440,7 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
               accept="image/*"
               disabled={uploading}
               onChange={(e) => handleMainUpload(e.target.files)}
-              className="mt-1 block text-sm text-coffee"
+              className="mt-2 block w-full cursor-pointer rounded-xl border-2 border-dashed border-pumpkin/60 p-3 text-sm text-coffee file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-pumpkin file:px-5 file:py-2 file:text-sm file:font-semibold file:text-white hover:border-pumpkin hover:file:bg-chestnut"
             />
           </label>
         </div>
@@ -477,7 +477,7 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
               multiple
               disabled={uploading}
               onChange={(e) => handleExtraUpload(e.target.files)}
-              className="mt-1 block text-sm text-coffee"
+              className="mt-2 block w-full cursor-pointer rounded-xl border-2 border-dashed border-pumpkin/60 p-3 text-sm text-coffee file:mr-3 file:cursor-pointer file:rounded-full file:border-0 file:bg-pumpkin file:px-5 file:py-2 file:text-sm file:font-semibold file:text-white hover:border-pumpkin hover:file:bg-chestnut"
             />
           </label>
         </div>
