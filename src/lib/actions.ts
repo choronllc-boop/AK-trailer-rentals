@@ -37,8 +37,14 @@ function revalidateBlog() {
 export async function uploadImage(formData: FormData): Promise<string> {
   const file = formData.get("file") as File | null;
   if (!file || file.size === 0) throw new Error("No file provided");
+  // Blob stores created with a custom name get a prefixed variable
+  // (e.g. blob_READ_WRITE_TOKEN) that put() won't find on its own.
+  const token =
+    process.env.BLOB_READ_WRITE_TOKEN ??
+    Object.entries(process.env).find(([k]) => k.endsWith("_READ_WRITE_TOKEN"))?.[1];
   const blob = await put(`trailers/${Date.now()}-${file.name}`, file, {
     access: "public",
+    token,
   });
   return blob.url;
 }
