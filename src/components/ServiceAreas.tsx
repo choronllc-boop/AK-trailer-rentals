@@ -8,10 +8,9 @@ export default function ServiceAreas() {
         Serving Salina and central Kansas.
       </h2>
       <p className="mx-auto mt-4 max-w-2xl text-almond/80">
-        We are conveniently located near Salina, Kansas and proudly provide trailer rentals to
-        customers throughout the surrounding central Kansas region. Whether you need a car
-        trailer or utility trailer, we serve homeowners, contractors, and businesses across the
-        region.
+        We are based out of Salina, Kansas and proudly serve customers within roughly 150 miles
+        of Salina. Whether you need a car trailer or utility trailer, we serve homeowners,
+        contractors, and businesses across the region.
       </p>
       <ul className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-3">
         {serviceAreas.map((area) => (
