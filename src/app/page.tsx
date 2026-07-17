@@ -10,10 +10,19 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col gap-24 pb-24">
-      <section className="bg-almond/40">
-        <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-20 sm:px-6">
-          <p className="text-sm font-semibold tracking-wide text-chestnut">SALINA, KANSAS</p>
-          <h1 className="max-w-2xl font-display text-4xl text-coffee sm:text-5xl">
+      <section className="relative overflow-hidden bg-almond/40">
+        <video
+          src="/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gray-800/50" />
+        <div className="relative mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-20 sm:px-6">
+          <p className="text-sm font-semibold tracking-wide text-white/90">SALINA, KANSAS</p>
+          <h1 className="max-w-2xl font-display text-4xl text-white sm:text-5xl">
             The right trailer, ready when you need it.
           </h1>
           <div className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-coffee">
@@ -36,7 +45,7 @@ export default async function Home() {
               </span>
             ))}
           </div>
-          <p className="max-w-xl text-lg text-coffee/80">
+          <p className="max-w-xl text-lg text-white/90">
             Our wood deck car hauler — rent by the day and tow with confidence
             across the Salina area and central Kansas.
           </p>
