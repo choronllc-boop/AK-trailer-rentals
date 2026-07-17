@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { put } from "@vercel/blob";
 import { sql, initSchema } from "./db";
 import type { Trailer, BlogPost } from "./site-data";
@@ -120,4 +121,45 @@ export async function deleteBlogPost(slug: string) {
   const db = requireDb();
   await db`DELETE FROM blog_posts WHERE slug = ${slug}`;
   revalidateBlog();
+}
+
+const RATE_LIMIT_SECONDS = 60;
+
+// Handles both the contact and booking forms: rate-limits per visitor,
+// stores the submission in Postgres, and forwards to the Google Sheets /
+// Calendar webhook when SHEETS_WEBHOOK_URL is configured.
+export async function submitForm(
+  kind: "contact" | "booking",
+  data: Record<string, string>,
+): Promise<{ ok?: boolean; error?: string }> {
+  const ip = ((await headers()).get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
+
+  if (sql) {
+    await initSchema();
+    const [recent] = await sql`
+      SELECT 1 FROM form_submissions
+      WHERE ip = ${ip} AND created_at > now() - make_interval(secs => ${RATE_LIMIT_SECONDS})
+      LIMIT 1
+    `;
+    if (recent) {
+      return { error: "You just sent a message — please wait a minute before sending another." };
+    }
+    await sql`INSERT INTO form_submissions (kind, ip, data) VALUES (${kind}, ${ip}, ${sql.json(data)})`;
+  }
+
+  const webhook = process.env.SHEETS_WEBHOOK_URL;
+  if (webhook) {
+    try {
+      await fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ kind, ...data }),
+      });
+    } catch {
+      // The submission is already stored in Postgres; a webhook hiccup
+      // shouldn't fail the visitor's request.
+    }
+  }
+
+  return { ok: true };
 }

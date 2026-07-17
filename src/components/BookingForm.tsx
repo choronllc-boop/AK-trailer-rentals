@@ -1,13 +1,16 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import type { Trailer } from "@/lib/site-data";
+import { submitForm } from "@/lib/actions";
 
 export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
   const searchParams = useSearchParams();
   const preselected = searchParams.get("trailer") ?? trailers[0]?.slug;
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   if (submitted) {
     return (
@@ -25,7 +28,17 @@ export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
       className="mt-10 space-y-6"
       onSubmit={(e) => {
         e.preventDefault();
-        setSubmitted(true);
+        setError("");
+        const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+        startTransition(async () => {
+          try {
+            const res = await submitForm("booking", data);
+            if (res.error) setError(res.error);
+            else setSubmitted(true);
+          } catch {
+            setError("Something went wrong — please try again or give us a call.");
+          }
+        });
       }}
     >
       <div>
@@ -125,11 +138,14 @@ export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
         />
       </div>
 
+      {error && <p className="text-sm font-semibold text-chestnut">{error}</p>}
+
       <button
         type="submit"
-        className="w-full rounded-full bg-pumpkin px-8 py-3 text-base font-semibold text-white hover:bg-chestnut"
+        disabled={isPending}
+        className="w-full rounded-full bg-pumpkin px-8 py-3 text-base font-semibold text-white hover:bg-chestnut disabled:opacity-50"
       >
-        Request Reservation
+        {isPending ? "Sending…" : "Request Reservation"}
       </button>
     </form>
   );
