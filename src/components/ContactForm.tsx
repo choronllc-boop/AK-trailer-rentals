@@ -104,26 +104,24 @@ export default function ContactForm({ trailers }: { trailers: Trailer[] }) {
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label className="block text-sm font-semibold text-coffee" htmlFor="c-pickup">
-            Pickup date
+            Pickup date *
           </label>
           <input
             id="c-pickup"
             name="pickupDate"
             type="date"
-            required
             defaultValue={prefillPickup}
             className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
           />
         </div>
         <div>
           <label className="block text-sm font-semibold text-coffee" htmlFor="c-return">
-            Return date
+            Return date *
           </label>
           <input
             id="c-return"
             name="returnDate"
             type="date"
-            required
             defaultValue={prefillReturn}
             className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
           />

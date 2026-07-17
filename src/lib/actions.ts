@@ -176,7 +176,7 @@ const RATE_LIMIT_SECONDS = 60;
 // stores the submission in Postgres, and forwards to the Google Sheets /
 // Calendar webhook when SHEETS_WEBHOOK_URL is configured.
 const REQUIRED_FIELDS = {
-  contact: ["name", "phone", "pickupDate", "returnDate"],
+  contact: ["name", "phone"],
   booking: ["name", "phone", "startDate", "endDate"],
 };
 
