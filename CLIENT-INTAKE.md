@@ -1,6 +1,6 @@
 # Client Intake — AK Trailer Rentals
 
-Information needed from the client to move the site from demo to full production.
+Information needed from the client to move the site from demo to full production yup.
 
 ## Business Info
 
