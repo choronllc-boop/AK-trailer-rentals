@@ -210,7 +210,7 @@ export const seedBlogPosts: BlogPost[] = [
     title: "Getting Ready for Firewood Season in Central Kansas",
     excerpt: "Why fall is the busiest season for our log and wood haulers, and how to book ahead.",
     body: placeholderBody("Why fall is the busiest season for our log and wood haulers, and how to book ahead."),
-    date: "2026-08-22",
+    date: "2026-02-06",
     category: "Seasonal",
   },
   {
@@ -350,7 +350,7 @@ A: You need three things: a receiver hitch rated for the loaded weight of the tr
 Start with the hitch itself. The receiver on your truck or SUV has a weight rating stamped on a label — a Class III hitch typically handles up to around 8,000 lbs towing, while Class IV and above handle the kind of weight a loaded car hauler represents. Remember it's the loaded weight that counts: our 22-ft wood deck car hauler can carry up to 9,900 lbs of cargo, so trailer plus vehicle can easily exceed what a light-duty hitch is rated for. Check the label on your receiver, not just a guess about what the truck "should" handle.
 
 Q: What is a four-way flat trailer wiring connector?
-A: A four-way flat is the small, flat, four-pin plug that handles the basics: running lights, brake lights, and left and right turn signals. It's the most common connector on light trailers, and most trucks and SUVs with a factory tow package have one (or the larger round seven-way that includes it). Heavier trailers with electric brakes use the seven-way round connector, because the extra pins carry the brake signal and a charging line. When you book, we'll tell you whether the trailer you're renting uses a four-way or seven-way connector and whether it has electric brakes — if it does, your tow vehicle also needs a brake controller, which many modern trucks with tow packages have built in.
+A: A four-way flat is the small, flat, four-pin plug that handles the basics: running lights, brake lights, and left and right turn signals. It's the most common connector on light trailers, and most trucks and SUVs with a factory tow package have one (or the larger round seven-way that includes it). Heavier trailers with electric brakes use the seven-way round connector, because the extra pins carry the brake signal and a charging line. Our 22-ft car hauler has electric brakes and uses a seven-way round connector, so your tow vehicle needs a brake controller — most modern trucks with a factory tow package have one built in, and we confirm your setup with you when you book.
 
 Q: What if my vehicle has the wrong connector?
 A: Adapters solve most mismatches in seconds — a seven-way-to-four-way adapter (or the reverse) costs little and plugs straight in. The one thing an adapter can't fake is a brake controller: if the trailer has electric brakes and your vehicle has no controller, the trailer brakes simply won't activate. If you're not sure what your vehicle has, snap a photo of your hitch and the connector socket and text or call us at 785-416-0279 before pickup day — we'll tell you exactly what you need, and help you get sorted with the right ball mount or adapter so nothing holds up your rental.

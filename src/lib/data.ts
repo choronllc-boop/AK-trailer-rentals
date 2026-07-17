@@ -17,17 +17,23 @@ async function ensureSeeded() {
     }
   }
 
-  // Version-gated so new seed posts reach an already-seeded database once,
-  // without resurrecting posts the admin has deleted. Bump when seedBlogPosts
-  // gains new entries.
-  const BLOG_SEED_VERSION = "3";
+  // Version-gated so seed posts sync to an already-seeded database once per
+  // bump, without resurrecting posts the admin has deleted. Bump when
+  // seedBlogPosts changes — note the upsert overwrites admin edits to posts
+  // whose slug matches a seed post.
+  const BLOG_SEED_VERSION = "4";
   const [seedMeta] = await sql`SELECT value FROM meta WHERE key = 'blog_seed_version'`;
   if (seedMeta?.value !== BLOG_SEED_VERSION) {
     for (const p of seedBlogPosts) {
       await sql`
         INSERT INTO blog_posts (slug, title, excerpt, body, date, category)
         VALUES (${p.slug}, ${p.title}, ${p.excerpt}, ${p.body}, ${p.date}, ${p.category})
-        ON CONFLICT (slug) DO NOTHING
+        ON CONFLICT (slug) DO UPDATE SET
+          title = EXCLUDED.title,
+          excerpt = EXCLUDED.excerpt,
+          body = EXCLUDED.body,
+          date = EXCLUDED.date,
+          category = EXCLUDED.category
       `;
     }
     await sql`
