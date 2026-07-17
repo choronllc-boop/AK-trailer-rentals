@@ -301,12 +301,7 @@ function TrailerForm({ trailer, onDone }: { trailer: Trailer | null; onDone: () 
       }
       return urls;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Upload failed";
-      setFormError(
-        /token/i.test(msg)
-          ? "Photo storage isn't set up yet. In Vercel: Storage → Create Database → Blob, then redeploy the site."
-          : msg,
-      );
+      setFormError(err instanceof Error ? err.message : "Upload failed");
       return [];
     } finally {
       setUploading(false);

@@ -57,7 +57,10 @@ export async function uploadImage(formData: FormData): Promise<{ url?: string; e
     const names = Object.keys(process.env)
       .filter((k) => /blob|token|store/i.test(k))
       .join(", ");
-    return { error: `${msg} — storage-related settings found: ${names || "none"}` };
+    const friendly = /token/i.test(msg)
+      ? "Photo storage isn't connected to this site yet. In Vercel: Storage tab → connect a Blob store to this project, then redeploy."
+      : msg;
+    return { error: `${friendly} (storage settings the site can see: ${names || "none"})` };
   }
 }
 
