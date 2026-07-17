@@ -50,6 +50,11 @@ export default function TrailerGrid({
             </button>
           </div>
         ))}
+
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-coffee/30 bg-almond/20 p-5 text-center">
+          <p className="font-semibold text-coffee/70">More trailers coming soon</p>
+          <p className="mt-1 text-sm text-coffee/50">We're growing the fleet — check back soon.</p>
+        </div>
       </div>
 
       {openTrailer && (

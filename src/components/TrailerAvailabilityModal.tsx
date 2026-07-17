@@ -84,7 +84,7 @@ export default function TrailerAvailabilityModal({
           <div className="rounded-xl border border-almond p-3">
             <p className="text-xs font-semibold uppercase tracking-wide text-coffee/50">Location</p>
             <p className="mt-1 flex items-center gap-1.5 text-sm font-semibold text-coffee">
-              <span className="size-2 rounded-full bg-green-500" /> Wasilla, AK
+              <span className="size-2 rounded-full bg-green-500" /> Salina, KS
             </p>
           </div>
         </div>

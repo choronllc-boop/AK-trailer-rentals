@@ -3,7 +3,7 @@ import ServiceAreas from "@/components/ServiceAreas";
 
 export const metadata: Metadata = {
   title: "Service Areas | AK Trailer Rentals",
-  description: "Trailer rentals serving Wasilla, the Mat-Su Valley, and Southcentral Alaska.",
+  description: "Trailer rentals serving Salina and central Kansas.",
 };
 
 export default function ServiceAreasPage() {

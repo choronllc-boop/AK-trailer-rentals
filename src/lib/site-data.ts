@@ -2,14 +2,12 @@ export const business = {
   name: "AK Trailer Rentals",
   phone: "785-416-0279",
   phoneHref: "tel:+17854160279",
-  email: "akrental7@outlook.com",
-  address: "1420 E Parks Hwy, Wasilla, AK 99654",
-  mapsHref: "https://www.google.com/maps/search/?api=1&query=1420+E+Parks+Hwy+Wasilla+AK+99654",
+  email: "akrentals7@outlook.com",
+  address: "N/A",
   facebookHref: "https://www.facebook.com/AKtransportationllc",
   hours: [
-    { day: "Monday – Friday", time: "8:00 AM – 6:00 PM" },
-    { day: "Saturday", time: "9:00 AM – 4:00 PM" },
-    { day: "Sunday", time: "Closed" },
+    { day: "Monday – Sunday", time: "8:00 AM – 6:00 PM" },
+    { day: "Emergency", time: "8:00 AM – 8:00 PM" },
   ],
 };
 
@@ -17,6 +15,7 @@ export const nav = [
   { label: "Home", href: "/" },
   { label: "Trailers", href: "/trailers" },
   { label: "Service Areas", href: "/service-areas" },
+  { label: "Vehicle Pickup", href: "/vehicle-pickup" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
@@ -118,89 +117,36 @@ export const facebookReviews: FacebookReview[] = [
 // fallback when no DATABASE_URL is configured (e.g. local dev).
 export const seedTrailers: Trailer[] = [
   {
-    slug: "car-hauler",
-    name: "Car Hauler Trailer",
-    tagline: "Open deck, 18 ft, tandem axle",
+    slug: "wood-deck-car-hauler",
+    name: "Wood Deck Car Hauler",
+    tagline: "Open deck, 22 ft, tandem axle",
     pricePerDay: 95,
     specs: [
       { label: "Capacity", value: "9,900 lbs" },
-      { label: "Deck Length", value: "18 ft" },
+      { label: "Deck Length", value: "22 ft" },
       { label: "Hitch Type", value: "2 5/16\" ball" },
       { label: "Axles", value: "Tandem" },
     ],
     description:
-      "Our open-deck car hauler is built for moving a single vehicle, ATV, or small equipment across the Mat-Su Valley. Steel ramps and tie-down points on all four corners make loading straightforward.",
+      "Our open-deck car hauler is built for moving a single vehicle, ATV, or small equipment across the Salina area and central Kansas. A wood deck and tie-down points on all four corners make loading straightforward.",
     amenities: ["Steel loading ramps", "4-corner tie-downs", "LED lighting", "Spare tire included"],
-    images: [],
-  },
-  {
-    slug: "log-hauler",
-    name: "Log & Wood Hauler",
-    tagline: "Heavy-duty flatbed, 20 ft",
-    pricePerDay: 110,
-    specs: [
-      { label: "Capacity", value: "12,000 lbs" },
-      { label: "Deck Length", value: "20 ft" },
-      { label: "Hitch Type", value: "2 5/16\" ball" },
-      { label: "Axles", value: "Tandem" },
-    ],
-    description:
-      "Built for hauling firewood, logs, and lumber around Southcentral Alaska. Reinforced stake pockets hold removable side rails for bulkier loads.",
-    amenities: ["Removable side rails", "Stake pockets", "Heavy-duty deck", "Chain tie-downs"],
-    images: [],
-  },
-  {
-    slug: "utility-trailer",
-    name: "Utility Trailer",
-    tagline: "Open deck, 12 ft, single axle",
-    pricePerDay: 65,
-    specs: [
-      { label: "Capacity", value: "3,500 lbs" },
-      { label: "Deck Length", value: "12 ft" },
-      { label: "Hitch Type", value: "2\" ball" },
-      { label: "Axles", value: "Single" },
-    ],
-    description:
-      "A do-it-all trailer for yard cleanup, moving furniture, or small landscaping jobs. Light enough to tow with most SUVs and trucks.",
-    amenities: ["Mesh side rails", "Rear ramp gate", "Tie-down loops", "Spare tire included"],
-    images: [],
-  },
-  {
-    slug: "enclosed-cargo",
-    name: "Enclosed Cargo Trailer",
-    tagline: "6x12 ft, weatherproof",
-    pricePerDay: 85,
-    specs: [
-      { label: "Capacity", value: "2,900 lbs" },
-      { label: "Interior", value: "6 x 12 ft" },
-      { label: "Hitch Type", value: "2\" ball" },
-      { label: "Axles", value: "Single" },
-    ],
-    description:
-      "Keep your cargo dry and secure on the Parks Highway. Great for moving, storage, and hauling tools or equipment that needs to stay covered.",
-    amenities: ["Lockable rear door", "Side entry door", "Interior tie-downs", "Weatherproof seal"],
     images: [],
   },
 ];
 
 export const serviceAreas = [
-  "Wasilla",
-  "Palmer",
-  "Big Lake",
-  "Meadow Lakes",
-  "Houston",
-  "Willow",
-  "Talkeetna",
-  "Trapper Creek",
-  "Chugiak",
-  "Eagle River",
-  "Anchorage",
-  "JBER",
-  "Peters Creek",
-  "Birchwood",
-  "Sutton",
-  "Chickaloon",
-  "Butte",
+  "Salina",
+  "Abilene",
+  "McPherson",
+  "Lindsborg",
+  "Ellsworth",
+  "Minneapolis",
+  "Bennington",
+  "Assaria",
+  "Gypsum",
+  "Solomon",
+  "Brookville",
+  "Junction City",
 ];
 
 export const faqs = [
@@ -210,15 +156,19 @@ export const faqs = [
   },
   {
     q: "Is a deposit required?",
-    a: "Yes, a refundable damage deposit is charged at pickup and returned once the trailer is checked back in undamaged.",
+    a: "Yes, a $90 deposit is required before the rental starts.",
+  },
+  {
+    q: "Do I need insurance to rent a trailer?",
+    a: "Yes, full coverage insurance is required. Renters must carry full coverage insurance before the rental starts.",
   },
   {
     q: "Can you deliver the trailer to me?",
-    a: "We offer local delivery and pickup throughout the Mat-Su Valley for an additional fee based on distance. Select \"delivery\" on the booking form and we'll confirm pricing.",
+    a: "We offer local delivery and pickup throughout the Salina area and central Kansas for an additional fee based on distance. Select \"delivery\" on the booking form and we'll confirm pricing.",
   },
   {
     q: "What's your cancellation policy?",
-    a: "Cancel or reschedule up to 24 hours before your reservation for a full refund. Cancellations inside 24 hours are subject to a one-day rental charge.",
+    a: "Just notify us at least 24 hours ahead of your rental start time to cancel or reschedule. Cancellations inside 24 hours are subject to a one-day rental charge.",
   },
   {
     q: "Do I need my own hitch ball and wiring?",
@@ -236,7 +186,7 @@ export type BlogPost = {
 };
 
 const placeholderBody = (excerpt: string) =>
-  `${excerpt}\n\nThis is placeholder content for the AK Trailer Rentals blog — practical guidance for renters in Wasilla and across the Mat-Su Valley.\n\nHave a question about this topic? Contact us and we'll be glad to help you pick the right trailer for the job.`;
+  `${excerpt}\n\nThis is placeholder content for the AK Trailer Rentals blog — practical guidance for renters in Salina and across central Kansas.\n\nHave a question about this topic? Contact us and we'll be glad to help you pick the right trailer for the job.`;
 
 export const seedBlogPosts: BlogPost[] = [
   {
@@ -256,8 +206,8 @@ export const seedBlogPosts: BlogPost[] = [
     category: "Guides",
   },
   {
-    slug: "firewood-season-mat-su",
-    title: "Getting Ready for Firewood Season in the Mat-Su Valley",
+    slug: "firewood-season-central-kansas",
+    title: "Getting Ready for Firewood Season in Central Kansas",
     excerpt: "Why fall is the busiest season for our log and wood haulers, and how to book ahead.",
     body: placeholderBody("Why fall is the busiest season for our log and wood haulers, and how to book ahead."),
     date: "2026-08-22",
@@ -265,7 +215,7 @@ export const seedBlogPosts: BlogPost[] = [
   },
   {
     slug: "spring-moving-checklist",
-    title: "Spring Moving Checklist for Southcentral Alaska",
+    title: "Spring Moving Checklist for Central Kansas",
     excerpt: "Planning a move this spring? Here's what to line up before your rental day.",
     body: placeholderBody("Planning a move this spring? Here's what to line up before your rental day."),
     date: "2026-04-01",

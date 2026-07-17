@@ -1,16 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  /* Taupe Grey — primary text + dark sections (was near-black coffee) */
-  --color-coffee: #604d53;
-  /* Darker taupe — hover shade for coffee-bg buttons (was mahogany) */
-  --color-mahogany: #453740;
-  /* Old Rose — secondary accent, hover states (was chestnut) */
-  --color-chestnut: #db7f8e;
-  /* Cool Steel — primary accent/CTA color (was pumpkin orange) */
-  --color-pumpkin: #9da3a4;
-  /* Soft Blush — light section backgrounds/borders (was almond) */
-  --color-almond: #ffdbda;
+  /* Carbon Black — primary/dark text (also used as fixed Nav/Footer bg via literal hex there) */
+  --color-coffee: #1b1b1e;
+  /* Charcoal Blue — dark accent, hover shade for coffee-bg buttons */
+  --color-mahogany: #2e3a46;
+  /* Darker teal — hover state for Pacific Blue CTAs */
+  --color-chestnut: #157e97;
+  /* Pacific Blue — primary accent/CTA color */
+  --color-pumpkin: #1ca9c9;
+  /* Powder Blue — light borders/section backgrounds */
+  --color-almond: #b7d9e2;
+  /* Alabaster Gray — page background */
+  --color-bg: #ededea;
+}
+
+html.dark {
+  /* Dark mode: near-black page background, light primary text, same teal accents */
+  --color-coffee: #f0efeb;
+  --color-mahogany: #b7d9e2;
+  --color-chestnut: #3fc3e0;
+  --color-pumpkin: #1ca9c9;
+  --color-almond: #3a3f45;
+  --color-bg: #131316;
 }
 
 @theme inline {
@@ -20,13 +32,60 @@
   --color-pumpkin: var(--color-pumpkin);
   --color-almond: var(--color-almond);
 
-  --font-sans: var(--font-montserrat);
-  --font-display: var(--font-cal-sans), var(--font-montserrat);
+  --font-sans: var(--font-barlow);
+  --font-display: var(--font-bebas), var(--font-barlow);
+}
+
+/* Condensed fonts (Bebas Neue / Barlow Condensed) read small — scale all rem-based
+   Tailwind sizes up ~6% instead of touching individual text-* classes. */
+html {
+  font-size: 17px;
 }
 
 body {
-  background: #fff;
+  background: var(--color-bg);
   color: var(--color-coffee);
+}
+
+/* ── Dark-mode overrides for hardcoded light utility classes ──────────────────
+   Page components hardcode bg-white etc.; color tokens flip in html.dark but
+   these classes don't, leaving light-flipped text on stuck-light surfaces.
+   Nav/Footer use bg-[#1b1b1e] (always dark) on purpose — not touched. */
+
+/* Cards, form inputs, modal panels, badges (page bg is #131316 → cards slightly lighter) */
+html.dark .bg-white {
+  background-color: #1e1e22;
+}
+
+/* Card borders: black is invisible on a dark card — use a subtle light border */
+html.dark .border-black {
+  border-color: #33333a;
+}
+
+/* bg-coffee sections/buttons pair with hardcoded text-white, but the coffee
+   token flips to near-white in dark mode. Pin these surfaces dark instead. */
+html.dark .bg-coffee {
+  background-color: #26262b;
+}
+
+/* Hover shade for bg-coffee buttons (mahogany token also flips light) */
+html.dark .hover\:bg-mahogany:hover {
+  background-color: #3a3f45;
+}
+
+/* Body copy inside bg-coffee boxes (almond token flips to dark gray) */
+html.dark .text-almond\/80 {
+  color: rgba(240, 239, 235, 0.75);
+}
+
+/* Pill borders inside the (now dark) ServiceAreas box */
+html.dark .border-almond\/30 {
+  border-color: rgba(240, 239, 235, 0.25);
+}
+
+/* Modal backdrop: coffee/60 flips to a washed-out white scrim — keep it black */
+html.dark .bg-coffee\/60 {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 @keyframes marquee {

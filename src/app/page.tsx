@@ -11,13 +11,13 @@ export default async function Home() {
     <div className="flex flex-col gap-24 pb-24">
       <section className="bg-almond/40">
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-20 sm:px-6">
-          <p className="text-sm font-semibold tracking-wide text-chestnut">WASILLA, ALASKA</p>
+          <p className="text-sm font-semibold tracking-wide text-chestnut">SALINA, KANSAS</p>
           <h1 className="max-w-2xl font-display text-4xl text-coffee sm:text-5xl">
             The right trailer, ready when you need it.
           </h1>
           <p className="max-w-xl text-lg text-coffee/80">
-            Car haulers, utility trailers, and more — rent by the day and tow with confidence
-            across the Mat-Su Valley and Southcentral Alaska.
+            Our wood deck car hauler — rent by the day and tow with confidence
+            across the Salina area and central Kansas.
           </p>
           <Link
             href="/book"

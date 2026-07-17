@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us | AK Trailer Rentals",
-  description: "Hours, phone, email, and location for AK Trailer Rentals in Wasilla, AK.",
+  description: "Hours, phone, email, and location for AK Trailer Rentals in Salina, KS.",
 };
 
 export default async function ContactPage() {
@@ -33,14 +33,7 @@ export default async function ContactPage() {
             </div>
             <div>
               <p className="text-sm font-semibold text-coffee/50">Location</p>
-              <a
-                href={business.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg font-semibold text-coffee hover:text-pumpkin"
-              >
-                {business.address}
-              </a>
+              <p className="text-lg font-semibold text-coffee">{business.address}</p>
             </div>
             <div>
               <p className="text-sm font-semibold text-coffee/50">Hours</p>

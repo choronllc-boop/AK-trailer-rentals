@@ -40,19 +40,17 @@ function FacebookIcon() {
 
 export default function Footer() {
   return (
-    <footer className="mt-auto bg-coffee text-almond">
+    <footer className="mt-auto bg-[#1b1b1e] text-white/90">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
           <Image
-            src="/logo.jpg"
+            src="/logo-transparent.png"
             alt={business.name}
             width={56}
             height={56}
-            className="rounded-md bg-white p-0.5"
           />
-          <p className="mt-4 max-w-xs text-sm text-almond/80">
-            Trailer rentals in Wasilla, Alaska. Serving the Mat-Su Valley and Southcentral
-            Alaska.
+          <p className="mt-4 max-w-xs text-sm text-white/70">
+            Trailer rentals in Salina, Kansas. Serving Salina and the surrounding area.
           </p>
           <div className="mt-5 flex items-center gap-3">
             <a
@@ -60,7 +58,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="AK Trailer Rentals on Facebook"
-              className="flex size-9 items-center justify-center rounded-full border border-almond/30 text-almond hover:border-pumpkin hover:text-pumpkin"
+              className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white hover:border-pumpkin hover:text-pumpkin"
             >
               <FacebookIcon />
             </a>
@@ -69,7 +67,7 @@ export default function Footer() {
 
         <div>
           <p className="text-xs font-semibold tracking-wide text-white">QUICK LINKS</p>
-          <ul className="mt-4 space-y-2 text-sm text-almond/80">
+          <ul className="mt-4 space-y-2 text-sm text-white/70">
             <li>
               <Link href="/" className="hover:text-pumpkin">
                 Home
@@ -87,17 +85,10 @@ export default function Footer() {
 
         <div>
           <p className="text-xs font-semibold tracking-wide text-white">CONTACT US</p>
-          <ul className="mt-4 space-y-3 text-sm text-almond/80">
-            <li>
-              <a
-                href={business.mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-2 hover:text-pumpkin"
-              >
-                <PinIcon />
-                {business.address}
-              </a>
+          <ul className="mt-4 space-y-3 text-sm text-white/70">
+            <li className="flex items-start gap-2">
+              <PinIcon />
+              {business.address}
             </li>
             <li>
               <a href={business.phoneHref} className="flex items-center gap-2 hover:text-pumpkin">
@@ -113,7 +104,7 @@ export default function Footer() {
             </li>
           </ul>
 
-          <ul className="mt-4 space-y-1 text-sm text-almond/80">
+          <ul className="mt-4 space-y-1 text-sm text-white/70">
             {business.hours.map((h) => (
               <li key={h.day} className="flex justify-between gap-4">
                 <span>{h.day}</span>
@@ -124,8 +115,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-almond/20">
-        <p className="mx-auto max-w-6xl px-4 py-6 text-center text-xs text-almond/60 sm:px-6">
+      <div className="border-t border-white/10">
+        <p className="mx-auto max-w-6xl px-4 py-6 text-center text-xs text-white/50 sm:px-6">
           © {new Date().getFullYear()} {business.name}. All rights reserved.
         </p>
       </div>
