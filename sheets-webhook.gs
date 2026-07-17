@@ -5,19 +5,25 @@
 // Contact submissions land in the "Contact Us" tab, reservations in the
 // "Reservations" tab. Tabs and header rows are created automatically.
 
+var TIME_ZONE = "America/Chicago"; // Salina, Kansas (Central Time)
+
+function now() {
+  return Utilities.formatDate(new Date(), TIME_ZONE, "MM/dd/yyyy h:mm a");
+}
+
 var FORMS = {
   contact: {
     sheetName: "Contact Us",
     headers: ["Received", "Name", "Phone", "Email", "Trailer", "Pickup Date", "Return Date", "Message"],
     row: function (d) {
-      return [new Date(), d.name, d.phone, d.email, prettify(d.trailerType), d.pickupDate, d.returnDate, d.message];
+      return [now(), d.name, d.phone, d.email, prettify(d.trailerType), d.pickupDate, d.returnDate, d.message];
     },
   },
   booking: {
     sheetName: "Reservations",
     headers: ["Received", "Name", "Phone", "Email", "Trailer", "Start Date", "End Date", "Pickup or Delivery"],
     row: function (d) {
-      return [new Date(), d.name, d.phone, d.email, prettify(d.trailer), d.startDate, d.endDate, prettify(d.fulfillment)];
+      return [now(), d.name, d.phone, d.email, prettify(d.trailer), d.startDate, d.endDate, prettify(d.fulfillment)];
     },
   },
 };
@@ -32,28 +38,38 @@ function prettify(slug) {
 }
 
 function doPost(e) {
-  var data = JSON.parse(e.postData.contents);
-  var config = FORMS[data.kind] || FORMS.contact;
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var config = FORMS[data.kind] || FORMS.contact;
 
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(config.sheetName) || ss.insertSheet(config.sheetName);
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) {
+      throw new Error(
+        "No spreadsheet attached. Create the script from INSIDE the sheet (Extensions > Apps Script), not as a standalone script.",
+      );
+    }
+    var sheet = ss.getSheetByName(config.sheetName) || ss.insertSheet(config.sheetName);
 
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(config.headers);
-    sheet.getRange(1, 1, 1, config.headers.length).setFontWeight("bold");
-    sheet.setFrozenRows(1);
-    sheet.setColumnWidths(1, config.headers.length, 150);
-    // Message column on the contact tab gets extra room.
-    if (config === FORMS.contact) sheet.setColumnWidth(config.headers.length, 320);
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(config.headers);
+      sheet.getRange(1, 1, 1, config.headers.length).setFontWeight("bold");
+      sheet.setFrozenRows(1);
+      sheet.setColumnWidths(1, config.headers.length, 150);
+      // Message column on the contact tab gets extra room.
+      if (config === FORMS.contact) sheet.setColumnWidth(config.headers.length, 320);
+    }
+
+    var row = config.row(data).map(function (v) { return v == null ? "" : v; });
+    sheet.appendRow(row);
+    sheet
+      .getRange(sheet.getLastRow(), 1, 1, config.headers.length)
+      .setVerticalAlignment("top")
+      .setWrap(true);
+
+    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
-
-  var row = config.row(data).map(function (v) { return v == null ? "" : v; });
-  sheet.appendRow(row);
-
-  var last = sheet.getLastRow();
-  sheet.getRange(last, 1).setNumberFormat('MM/dd/yyyy h:mm AM/PM');
-  sheet.getRange(last, 1, 1, config.headers.length).setVerticalAlignment("top").setWrap(true);
-
-  return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-    .setMimeType(ContentService.MimeType.JSON);
 }

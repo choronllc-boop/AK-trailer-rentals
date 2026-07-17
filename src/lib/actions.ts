@@ -206,15 +206,21 @@ export async function submitForm(
 
   const webhook = process.env.SHEETS_WEBHOOK_URL;
   if (webhook) {
+    // The submission is already stored in Postgres; a webhook hiccup
+    // shouldn't fail the visitor's request — but log it so failures are
+    // visible in the Vercel function logs.
     try {
-      await fetch(webhook, {
+      const res = await fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ kind, ...data }),
       });
-    } catch {
-      // The submission is already stored in Postgres; a webhook hiccup
-      // shouldn't fail the visitor's request.
+      const body = await res.text();
+      if (!res.ok || body.includes('"ok":false')) {
+        console.error(`Sheets webhook failed (HTTP ${res.status}): ${body.slice(0, 500)}`);
+      }
+    } catch (err) {
+      console.error("Sheets webhook unreachable:", err);
     }
   }
 
