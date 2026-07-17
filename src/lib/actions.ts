@@ -54,7 +54,7 @@ export async function saveTrailer(trailer: Trailer, originalSlug?: string) {
 
   await db`
     INSERT INTO trailers (slug, name, tagline, price_per_day, specs, description, amenities, images)
-    VALUES (${slug}, ${trailer.name}, ${trailer.tagline}, ${trailer.pricePerDay}, ${JSON.stringify(trailer.specs)}, ${trailer.description}, ${JSON.stringify(trailer.amenities)}, ${JSON.stringify(trailer.images)})
+    VALUES (${slug}, ${trailer.name}, ${trailer.tagline}, ${trailer.pricePerDay}, ${db.json(trailer.specs)}, ${trailer.description}, ${db.json(trailer.amenities)}, ${db.json(trailer.images)})
     ON CONFLICT (slug) DO UPDATE SET
       name = EXCLUDED.name,
       tagline = EXCLUDED.tagline,

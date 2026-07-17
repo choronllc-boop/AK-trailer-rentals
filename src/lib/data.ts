@@ -11,7 +11,7 @@ async function ensureSeeded() {
     for (const [i, t] of seedTrailers.entries()) {
       await sql`
         INSERT INTO trailers (slug, name, tagline, price_per_day, specs, description, amenities, images, sort_order)
-        VALUES (${t.slug}, ${t.name}, ${t.tagline}, ${t.pricePerDay}, ${JSON.stringify(t.specs)}, ${t.description}, ${JSON.stringify(t.amenities)}, ${JSON.stringify(t.images)}, ${i})
+        VALUES (${t.slug}, ${t.name}, ${t.tagline}, ${t.pricePerDay}, ${sql.json(t.specs)}, ${t.description}, ${sql.json(t.amenities)}, ${sql.json(t.images)}, ${i})
         ON CONFLICT (slug) DO NOTHING
       `;
     }
@@ -40,16 +40,22 @@ type TrailerRow = {
   images: string[];
 };
 
+// Rows written before sql.json() was used may hold double-encoded JSON
+// (a jsonb string containing the array) — parse those back on read.
+function fromJsonb<T>(value: T | string): T {
+  return typeof value === "string" ? (JSON.parse(value) as T) : value;
+}
+
 function rowToTrailer(row: TrailerRow): Trailer {
   return {
     slug: row.slug,
     name: row.name,
     tagline: row.tagline,
     pricePerDay: row.price_per_day,
-    specs: row.specs,
+    specs: fromJsonb(row.specs),
     description: row.description,
-    amenities: row.amenities,
-    images: row.images,
+    amenities: fromJsonb(row.amenities),
+    images: fromJsonb(row.images),
   };
 }
 
