@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { business, nav } from "@/lib/site-data";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const links = nav.filter((item) => !["/", "/contact", "/book"].includes(item.href));
 
@@ -53,7 +52,6 @@ export default function Nav() {
           >
             Book a Trailer
           </Link>
-          <ThemeToggle />
         </div>
       </div>
     </header>

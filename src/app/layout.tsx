@@ -36,16 +36,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebas.variable} ${barlow.variable} h-full antialiased`}
+      className={`${bebas.variable} ${barlow.variable} dark h-full antialiased`}
     >
-      <head>
-        <script
-          // Apply stored theme before paint to avoid a flash of the wrong theme.
-          dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem("theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}`,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col">
         <Nav />
         <main className="flex-1">{children}</main>
