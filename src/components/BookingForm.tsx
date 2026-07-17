@@ -8,6 +8,8 @@ import { submitForm } from "@/lib/actions";
 export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
   const searchParams = useSearchParams();
   const preselected = searchParams.get("trailer") ?? trailers[0]?.slug;
+  const prefillPickup = searchParams.get("pickup") ?? undefined;
+  const prefillReturn = searchParams.get("return") ?? undefined;
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -69,6 +71,7 @@ export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
             name="startDate"
             type="date"
             required
+            defaultValue={prefillPickup}
             className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
           />
         </div>
@@ -81,6 +84,7 @@ export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
             name="endDate"
             type="date"
             required
+            defaultValue={prefillReturn}
             className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
           />
         </div>

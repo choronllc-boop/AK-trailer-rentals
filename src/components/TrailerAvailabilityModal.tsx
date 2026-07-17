@@ -5,8 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Trailer } from "@/lib/site-data";
 
-type DayStatus = "available" | "limited" | "unavailable";
-
 function toISODate(d: Date) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -25,21 +23,6 @@ function stripTime(d: Date) {
 function addMonths(d: Date, n: number) {
   return new Date(d.getFullYear(), d.getMonth() + n, 1);
 }
-
-// Deterministic per-date status so server/client render match (no Math.random).
-// Mostly available, some limited, occasional unavailable.
-function statusFor(d: Date): DayStatus {
-  const seed = (d.getFullYear() * 372 + d.getMonth() * 31 + d.getDate()) % 10;
-  if (seed === 0) return "unavailable";
-  if (seed <= 2) return "limited";
-  return "available";
-}
-
-const STATUS_COLOR: Record<DayStatus, string> = {
-  available: "bg-green-500",
-  limited: "bg-yellow-500",
-  unavailable: "bg-red-500",
-};
 
 function buildMonthCells(year: number, month: number) {
   const firstDay = new Date(year, month, 1);
@@ -104,12 +87,11 @@ function MonthGrid({
         {cells.map((date, i) => {
           if (!date) return <span key={i} />;
           const past = date < today;
-          const status = statusFor(date);
           const isToday = isSameDay(date, today);
           const isStart = start && isSameDay(date, start);
           const isEnd = end && isSameDay(date, end);
           const inRange = start && end && date > start && date < end;
-          const selectable = !past && status !== "unavailable";
+          const selectable = !past;
 
           return (
             <button
@@ -120,7 +102,6 @@ function MonthGrid({
               className={[
                 "relative mx-auto flex size-8 flex-col items-center justify-center rounded-md text-xs",
                 past ? "text-[#c9c9c9]" : "text-coffee",
-                !past && !selectable ? "cursor-not-allowed text-[#c9c9c9] line-through" : "",
                 selectable && !isStart && !isEnd ? "hover:bg-almond/40" : "",
                 isToday && !isStart && !isEnd ? "border border-[#e8963e]" : "",
                 inRange ? "bg-[#f0f0f0]" : "",
@@ -131,7 +112,7 @@ function MonthGrid({
               {selectable && (
                 <span
                   className={`absolute bottom-0.5 size-1 rounded-full ${
-                    isStart || isEnd ? "bg-white" : STATUS_COLOR[status]
+                    isStart || isEnd ? "bg-white" : "bg-green-500"
                   }`}
                 />
               )}
@@ -184,10 +165,9 @@ export default function TrailerAvailabilityModal({
     }
   }
 
-  const requestHref =
-    start && end
-      ? `/contact?pickup=${toISODate(start)}&return=${toISODate(end)}&trailer=${trailer.slug}`
-      : undefined;
+  const dateParams = start && end ? `&pickup=${toISODate(start)}&return=${toISODate(end)}` : "";
+  const requestHref = start && end ? `/contact?trailer=${trailer.slug}${dateParams}` : undefined;
+  const bookingHref = `/book?trailer=${trailer.slug}${dateParams}`;
 
   return (
     <div
@@ -319,17 +299,6 @@ export default function TrailerAvailabilityModal({
             <MonthGrid monthDate={addMonths(viewMonth, 1)} today={today} start={start} end={end} onPick={handlePick} />
           </div>
 
-          <div className="mt-4 flex items-center justify-center gap-6 text-xs text-coffee/70">
-            <span className="flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-green-500" /> Available
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-yellow-500" /> Limited
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-red-500" /> Unavailable
-            </span>
-          </div>
         </div>
 
         {requestHref ? (
@@ -346,7 +315,7 @@ export default function TrailerAvailabilityModal({
         )}
 
         <Link
-          href={`/book?trailer=${trailer.slug}`}
+          href={bookingHref}
           className="mt-3 block w-full rounded-full bg-pumpkin px-8 py-3 text-center text-base font-semibold text-white hover:bg-chestnut"
         >
           Continue to Booking
