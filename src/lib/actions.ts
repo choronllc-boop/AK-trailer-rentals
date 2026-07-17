@@ -7,9 +7,9 @@ import { put } from "@vercel/blob";
 import { sql, initSchema } from "./db";
 import type { Trailer, BlogPost } from "./site-data";
 
-// Fallback only used when ADMIN_PASSWORD isn't set in the environment.
-// This constant never reaches the client because this file is "use server".
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "MXyc6loroJhijsOIGWFZgSvQ";
+// Set ADMIN_PASSWORD in the environment (Vercel project settings / .env.local).
+// If it's unset, admin login is disabled entirely rather than falling back.
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "";
 const ADMIN_COOKIE = "ak_admin";
 
 function adminCookieValue() {
@@ -21,6 +21,9 @@ function adminCookieValue() {
 const loginFailures = new Map<string, { count: number; last: number }>();
 
 export async function adminLogin(password: string): Promise<{ ok?: boolean; error?: string }> {
+  if (!ADMIN_PASSWORD) {
+    return { error: "Admin login is not configured. Set ADMIN_PASSWORD in the environment." };
+  }
   const ip = ((await headers()).get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
   const fails = loginFailures.get(ip);
   if (fails && fails.count >= 5 && Date.now() - fails.last < 15 * 60 * 1000) {
@@ -45,6 +48,7 @@ export async function adminLogin(password: string): Promise<{ ok?: boolean; erro
 }
 
 export async function isAdminLoggedIn(): Promise<boolean> {
+  if (!ADMIN_PASSWORD) return false;
   const cookie = (await cookies()).get(ADMIN_COOKIE)?.value;
   return cookie === adminCookieValue();
 }
