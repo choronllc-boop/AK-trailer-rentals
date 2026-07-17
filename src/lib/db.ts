@@ -43,6 +43,14 @@ export function initSchema() {
       )
       .then(
         () => sql`
+          CREATE TABLE IF NOT EXISTS meta (
+            key TEXT PRIMARY KEY,
+            value TEXT NOT NULL
+          )
+        `,
+      )
+      .then(
+        () => sql`
           CREATE TABLE IF NOT EXISTS form_submissions (
             id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             kind TEXT NOT NULL,

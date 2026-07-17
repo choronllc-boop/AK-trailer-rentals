@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
-import { createHash } from "node:crypto";
+import { createHash, timingSafeEqual } from "node:crypto";
 import { put } from "@vercel/blob";
 import { sql, initSchema } from "./db";
 import type { Trailer, BlogPost } from "./site-data";
@@ -16,10 +16,24 @@ function adminCookieValue() {
   return createHash("sha256").update(ADMIN_PASSWORD).digest("hex");
 }
 
+// ponytail: in-memory throttle — best-effort on serverless (per warm instance);
+// move to Postgres if real brute-force traffic ever shows up.
+const loginFailures = new Map<string, { count: number; last: number }>();
+
 export async function adminLogin(password: string): Promise<{ ok?: boolean; error?: string }> {
-  if (password !== ADMIN_PASSWORD) {
+  const ip = ((await headers()).get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
+  const fails = loginFailures.get(ip);
+  if (fails && fails.count >= 5 && Date.now() - fails.last < 15 * 60 * 1000) {
+    return { error: "Too many attempts. Try again in 15 minutes." };
+  }
+  const ok =
+    password.length === ADMIN_PASSWORD.length &&
+    timingSafeEqual(Buffer.from(password), Buffer.from(ADMIN_PASSWORD));
+  if (!ok) {
+    loginFailures.set(ip, { count: (fails?.count ?? 0) + 1, last: Date.now() });
     return { error: "Incorrect password." };
   }
+  loginFailures.delete(ip);
   (await cookies()).set(ADMIN_COOKIE, adminCookieValue(), {
     httpOnly: true,
     secure: true,
@@ -157,10 +171,20 @@ const RATE_LIMIT_SECONDS = 60;
 // Handles both the contact and booking forms: rate-limits per visitor,
 // stores the submission in Postgres, and forwards to the Google Sheets /
 // Calendar webhook when SHEETS_WEBHOOK_URL is configured.
+const REQUIRED_FIELDS = {
+  contact: ["name", "phone", "pickupDate", "returnDate"],
+  booking: ["name", "phone", "startDate", "endDate"],
+};
+
 export async function submitForm(
   kind: "contact" | "booking",
   data: Record<string, string>,
 ): Promise<{ ok?: boolean; error?: string }> {
+  const missing = REQUIRED_FIELDS[kind].filter((f) => !data[f]?.trim());
+  if (missing.length) {
+    return { error: `Missing required fields: ${missing.join(", ")}` };
+  }
+
   const ip = ((await headers()).get("x-forwarded-for") ?? "unknown").split(",")[0].trim();
 
   if (sql) {

@@ -17,8 +17,12 @@ async function ensureSeeded() {
     }
   }
 
-  const [{ count: postCount }] = await sql`SELECT count(*)::int FROM blog_posts`;
-  if (postCount === 0) {
+  // Version-gated so new seed posts reach an already-seeded database once,
+  // without resurrecting posts the admin has deleted. Bump when seedBlogPosts
+  // gains new entries.
+  const BLOG_SEED_VERSION = "2";
+  const [seedMeta] = await sql`SELECT value FROM meta WHERE key = 'blog_seed_version'`;
+  if (seedMeta?.value !== BLOG_SEED_VERSION) {
     for (const p of seedBlogPosts) {
       await sql`
         INSERT INTO blog_posts (slug, title, excerpt, body, date, category)
@@ -26,6 +30,10 @@ async function ensureSeeded() {
         ON CONFLICT (slug) DO NOTHING
       `;
     }
+    await sql`
+      INSERT INTO meta (key, value) VALUES ('blog_seed_version', ${BLOG_SEED_VERSION})
+      ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value
+    `;
   }
 }
 

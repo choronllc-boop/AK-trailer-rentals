@@ -25,7 +25,6 @@ const barlow = localFont({
 export const metadata: Metadata = {
   title: "AK Trailer Rentals",
   description: "Trailer rentals serving Salina, Kansas and the surrounding area.",
-  icons: { icon: "/logo-transparent.png" },
 };
 
 export default function RootLayout({

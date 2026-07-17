@@ -122,7 +122,7 @@ function MonthGrid({
                 past ? "text-[#c9c9c9]" : "text-coffee",
                 !past && !selectable ? "cursor-not-allowed text-[#c9c9c9] line-through" : "",
                 selectable && !isStart && !isEnd ? "hover:bg-almond/40" : "",
-                isToday && !isStart && !isEnd ? "border border-pumpkin" : "",
+                isToday && !isStart && !isEnd ? "border border-[#e8963e]" : "",
                 inRange ? "bg-[#f0f0f0]" : "",
                 isStart || isEnd ? "bg-coffee font-semibold text-white" : "",
               ].join(" ")}

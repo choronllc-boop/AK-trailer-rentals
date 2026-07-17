@@ -127,15 +127,15 @@ export default function BookingForm({ trailers }: { trailers: Trailer[] }) {
 
       <div>
         <label className="block text-sm font-semibold text-coffee" htmlFor="email">
-          Email
+          Email *
         </label>
         <input
           id="email"
           name="email"
           type="email"
-          required
           className="mt-2 w-full rounded-xl border border-almond bg-white px-4 py-3 text-coffee"
         />
+        <p className="mt-1 text-xs text-coffee/60">Fields marked with * are optional.</p>
       </div>
 
       {error && <p className="text-sm font-semibold text-chestnut">{error}</p>}
