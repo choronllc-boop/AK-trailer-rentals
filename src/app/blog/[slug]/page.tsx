@@ -56,6 +56,17 @@ export default async function BlogPostPage({
   const post = await getBlogPost(slug);
   if (!post) notFound();
 
+  const postJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    url: `https://aktrailerrentals.com/blog/${post.slug}`,
+    author: { "@type": "Organization", name: "AK Trailer Rentals" },
+    publisher: { "@type": "Organization", name: "AK Trailer Rentals" },
+  };
+
   const faqs = extractFaqs(post.body);
   const faqJsonLd =
     faqs.length > 0
@@ -72,6 +83,10 @@ export default async function BlogPostPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(postJsonLd) }}
+      />
       {faqJsonLd && (
         <script
           type="application/ld+json"

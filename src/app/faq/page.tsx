@@ -6,9 +6,23 @@ export const metadata: Metadata = {
   description: "Answers to common questions about renting a trailer from AK Trailer Rentals.",
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+
 export default function FaqPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <p className="text-sm font-semibold tracking-wide text-chestnut">FAQ</p>
       <h1 className="mt-3 font-display text-4xl text-coffee">Frequently Asked Questions</h1>
 
